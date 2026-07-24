@@ -1,0 +1,6 @@
+# Pocket Gull Team — George B. Moody PhysioNet Challenge 2026
+
+Team Name: Pocket Gull
+Members: Phil Gear (Lead ML Architect & Systems Engineer)
+Organization: Pocket Gull AI / Understory Clinical Intelligence Engine
+Contact: Pocket Gull AI Research Team
