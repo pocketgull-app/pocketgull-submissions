@@ -1,33 +1,44 @@
-# 🕊️ Pocket Gull — George B. Moody PhysioNet Challenge 2026 Submission
+<div align="center">
+  <img width="1200" height="475" alt="Pocket Gull Banner" src="docs/pocketgull-banner.png" />
+</div>
 
-> **Official Competition Repository & Machine Learning Architecture for Cognitive Impairment Prediction from Polysomnography (PSG)**
+<div align="center">
 
-![PhysioNet 2026](https://img.shields.io/badge/PhysioNet-2026_Challenge-indigo?style=for-the-badge)
-![GroupKFold AUROC](https://img.shields.io/badge/GroupKFold_AUROC-0.9032-emerald?style=for-the-badge)
-![LOSO AUROC](https://img.shields.io/badge/LOSO_Cross--Site_AUROC-0.8711-blue?style=for-the-badge)
-![Prevalence Reward](https://img.shields.io/badge/Prevalence_Reward_r__C-0.7137-violet?style=for-the-badge)
-![Conformal Coverage](https://img.shields.io/badge/Conformal_Coverage-95.0%25-cyan?style=for-the-badge)
-![FMEA Audit](https://img.shields.io/badge/FMEA_Audit_Gates-5%2F5_PASS-purple?style=for-the-badge)
+# 🕊️ Pocket Gull (PhysioNet Challenge 2026)
+
+[![PhysioNet 2026](https://img.shields.io/badge/PhysioNet-2026_Challenge-4F46E5?style=for-the-badge&logo=medrxiv&logoColor=white)](https://physionet.org/content/challenge-2026/)
+[![GroupKFold AUROC](https://img.shields.io/badge/GroupKFold_AUROC-0.9032-10B981?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![LOSO AUROC](https://img.shields.io/badge/LOSO_Cross--Site_AUROC-0.8711-2563EB?style=for-the-badge)](https://github.com/philgear/pocketgull-submissions)
+[![Prevalence Reward](https://img.shields.io/badge/Prevalence_Reward_r__C-0.7137-8B5CF6?style=for-the-badge)](https://github.com/philgear/pocketgull-submissions)
+[![Conformal Coverage](https://img.shields.io/badge/Conformal_Coverage-95.0%25-06B6D4?style=for-the-badge)](https://github.com/philgear/pocketgull-submissions)
+[![FMEA Audit](https://img.shields.io/badge/FMEA_Audit_Gates-5%2F5_PASS-9333EA?style=for-the-badge)](./STRATEGY_BLUEPRINT.md)
+
+Official Machine Learning Architecture & Competition Entry for **Cognitive Impairment Prediction from Polysomnography (PSG)** in the George B. Moody PhysioNet Challenge 2026.
+
+[Read Strategic Blueprint](./STRATEGY_BLUEPRINT.md) • [View Live Care Engine](https://pocketgull.web.app)
+
+</div>
 
 ---
 
-## 📖 Executive Overview
+### 📖 Executive Overview
 
 This repository houses **Pocket Gull's official entry for the George B. Moody PhysioNet Challenge 2026**. The challenge objective is to continuously predict cognitive impairment and neuro-degenerative risks directly from multi-channel Polysomnography (PSG) sleep recordings, clinical vitals, and algorithmic/expert annotations.
 
 Pocket Gull introduces a **100-feature Multi-Modal Sleep Intelligence Engine** combining:
-- **Decoupled Output Strategy ("Two-Headed Hydra")** optimizing $s_C$ Age-Conditioned AUROC (via pairwise ranker probabilities) and $r_C$ Prevalence Reward (via continuous $p$-clamped thresholding)
-- **NaN-Immune Stacking meta-learner** with RF, ExtraTrees, HistGBT, L1-LR, and XGBoost base learners
-- **Age-stratified sub-models** with cohort-calibrated decision thresholds
-- EEG spectral band decomposition (theta/alpha ratio MCI biomarker), CAISR staging uncertainty, Markov sleep transition dynamics (N2→N1, N3→N3, REM→Wake), and HRV autonomic markers
-- **Memory & Time Armor**: 100Hz signal decimation and parallel CPU core batch extraction for Docker compliance
-- **Fuzzy Regex Channel Lookup** ("Dictionary of Babel") for multi-hospital site lead harmonization
-- Distribution-free **95% Conformal Prediction Intervals**
-- **GroupKFold** (0.9032 AUROC) and **Leave-One-Site-Out (LOSO)** (0.8711 AUROC) cross-validation
+* **Decoupled Output Strategy ("Two-Headed Hydra"):** Optimizing $s_C$ Age-Conditioned AUROC (via pairwise ranker probabilities) and $r_C$ Prevalence Reward (via continuous $p$-clamped thresholding).
+* **NaN-Immune Stacking Meta-Learner:** Powered by RF, ExtraTrees, HistGBT, L1-LR, and XGBoost base learners.
+* **Age-Stratified Sub-Models:** Cohort-calibrated decision thresholds tailored to young, mid, and elderly demographics.
+* **EEG & Biomarker Decomposition:** Theta/alpha ratio MCI biomarkers, CAISR staging uncertainty, Markov sleep transition dynamics (N2→N1, N3→N3, REM→Wake), and HRV autonomic markers.
+* **Memory & Time Armor:** 100Hz signal decimation and parallel CPU core batch extraction for strict Docker compliance.
+* **Fuzzy Regex Channel Lookup ("Dictionary of Babel"):** Multi-hospital site lead harmonization.
+* **Distribution-Free 95% Conformal Intervals:** Rigorous test-time uncertainty bounds.
 
 ---
 
-## 🏗️ End-to-End System Architecture
+<div align="center">
+  <img width="800" alt="Architecture Overview" src="docs/divider-architecture.png" />
+</div>
 
 ```mermaid
 flowchart TD
@@ -69,31 +80,35 @@ flowchart TD
 
 ---
 
-## 📊 Official PhysioNet 2026 Evaluation Metrics
+### 📊 Official PhysioNet 2026 Evaluation Metrics
 
 The official competition scoring system balances age-adjusted discrimination with prevalence-weighted rewards:
 
-### 1. Age-Conditioned AUROC ($s_C$)
+#### 1. Age-Conditioned AUROC ($s_C$)
 To prevent models from using age as a trivial shortcut proxy for cognitive decline, evaluation is performed across age-stratified cohorts ($\delta = \pm 2$ years):
 $$s_C = \frac{1}{|C|} \sum_{c \in C} \text{AUROC}(Y_c, \hat{Y}_c)$$
 
-### 2. Prevalence-Based Reward ($r_C$)
+#### 2. Prevalence-Based Reward ($r_C$)
 Evaluates decision quality conditioned on cohort disease prevalence to reward calibrated risk assessment in high-risk edge cases:
 $$r_C = \sum_{i} w_i \cdot \text{Reward}(y_i, \hat{y}_i, \text{Prevalence}_i)$$
 
-### Age-Adaptive Thresholding Strategy
+#### Age-Adaptive Thresholding Strategy
 
 The optimal binary threshold is derived from reward-cost analysis and equals the **prevalence at each age bin**:
 
 | Age Bin | Approx. Prevalence | TP Reward (1/p - 1) | Decision Threshold |
-|:---|:---:|:---:|:---:|
+|:---|:---:|:---:|:---|
 | Young (<55) | ~5% | ~19x | Computed from training data |
 | Mid (55-70) | ~20% | ~4x | Computed from training data |
 | Elder (70+) | ~40% | ~1.5x | Computed from training data |
 
 ---
 
-## 🔬 Feature Pipeline (100 Features)
+<div align="center">
+  <img width="800" alt="100-Feature Biomarker Pipeline" src="docs/divider-biomarkers.png" />
+</div>
+
+### 🔬 Feature Pipeline (100 Biomarkers)
 
 | Category | Source | Count | Key Biomarkers |
 |:---|:---|:---:|:---|
@@ -112,7 +127,7 @@ The optimal binary threshold is derived from reward-cost analysis and equals the
 
 ---
 
-## 🛡️ 5 Risk-Weighted FMEA Pre-Export Assertion Gates
+### 🛡️ 5 Risk-Weighted FMEA Pre-Export Assertion Gates
 
 To guarantee zero model failures prior to exporting `model.sav` for Docker container grading, all builds pass 5 automated **Failure Mode & Effects Analysis (FMEA) Assertion Gates**:
 
@@ -126,38 +141,27 @@ To guarantee zero model failures prior to exporting `model.sav` for Docker conta
 
 ---
 
-## 🎯 95% Conformal Prediction Uncertainty Bounds
+### 🚀 Quickstart & Execution Guide
 
-In addition to point probability outputs, `team_code.py` computes distribution-free **95% Conformal Prediction Intervals**:
-
-$$\mathcal{C}_{0.95}(x) = \left[ \max(0, p - \hat{q}), \min(1, p + \hat{q}) \right]$$
-
-- **High Certainty**: Interval width $\le 0.20 \rightarrow$ Model decision confident with 95% statistical coverage guarantee.
-- **Moderate / High Uncertainty**: Interval width $> 0.20 \rightarrow$ Triggers Conformal Test-Time Augmentation (TTA) with 5 micro-perturbations to stabilize decision logits.
-
----
-
-## 🚀 Quickstart & Execution Guide
-
-### 1. Generate Synthetic PSG EDF Waveform Dataset
+#### 1. Generate Synthetic PSG EDF Waveform Dataset
 ```bash
 python create_synthetic_psg_edf.py
 ```
 *Generates multi-channel binary `.edf` files (`EEG C3/C4`, `EOG`, `EMG`, `ECG`, `Airflow`, `SpO2`) and `demographics.csv`.*
 
-### 2. Run FMEA Risk & Conformal Assertion Audit
+#### 2. Run FMEA Risk & Conformal Assertion Audit
 ```bash
 python test_pocketgull_model.py
 ```
 *Validates all 5 FMEA gates and 95% conformal bounds before model export.*
 
-### 3. Train Challenge Model
+#### 3. Train Challenge Model
 ```bash
 python train_model.py -d synthetic_dataset -m synthetic_model -v
 ```
 *Trains stacking ensemble (or soft-voting fallback), age-stratified sub-models, computes prevalence-based thresholds, runs GroupKFold + LOSO evaluation, and serializes `synthetic_model/model.sav`.*
 
-### 4. Run Challenge Model Inference
+#### 4. Run Challenge Model Inference
 ```bash
 python run_model.py -d synthetic_dataset -m synthetic_model -o synthetic_predictions -v
 ```
@@ -165,10 +169,14 @@ python run_model.py -d synthetic_dataset -m synthetic_model -o synthetic_predict
 
 ---
 
-## 📂 Repository File Structure
+### 📂 Repository File Structure
 
 ```text
-python_example_2026/
+pocketgull-submissions/
+├── docs/
+│   ├── pocketgull-banner.png       # Hero visual banner
+│   ├── divider-architecture.png    # Section divider graphic
+│   └── divider-biomarkers.png      # Section divider graphic
 ├── STRATEGY_BLUEPRINT.md          # Multi-perspective strategic ML blueprint & roadmap
 ├── CHANGELOG.md                   # Formal semantic versioning & contest release history
 ├── README.md                      # Official contest submission documentation (This file)
@@ -187,23 +195,21 @@ python_example_2026/
 
 ---
 
-## ⚙️ Graceful Degradation & Production-Grade Safeguards
+### ⚖️ License & Attribution
 
-The pipeline automatically scales its architecture and enforces 4 production-grade safeguards:
-
-| Condition / Trigger | Architectural Safeguard & Behavior | Impact / Protection |
-|:---|:---|:---|
-| **Corrupted or 0-Byte EDF** | `@safe_extract` Zero-Crash Decorator ("Black Swan Interceptor") | Prevents container crashes; returns safe NaN vector for downstream imputation |
-| **Hospital Hardware Variance** | Covariate Armor (Intra-Patient Baseline Normalization) | Neutralizes amplifier scaling across sites relative to patient median baseline |
-| **Docker Container RAM Limits** | Dynamic RAM-aware worker limit (`psutil`) + `float32` matrix | Prevents Docker 16GB OOM container kills during 5,000-patient batch evaluation |
-| **Borderline Clinical Case** | Conformal Test-Time Augmentation (5 micro-perturbation TTA) | Rescues overconfident false positives when conformal interval width $>0.20$ |
-| **n_samples >= 30** | Full Stacking Ensemble with XGBoost, HistGBT, RF, ET, and L1-LR | Out-of-fold meta-learning activated |
-| **n_samples < 30** | Soft-Voting Fallback Ensemble | Prevents meta-learner overfitting on small datasets |
-| **n_bin >= 20 per age cohort** | Age-Stratified Cohort Sub-Models (Young, Mid, Elder) | Trained and evaluated per age bin |
-| **n_bin < 20 per age cohort** | Global Stacking Fallback Model | Bypasses uncalibrated sub-models |
+- System & ML Architecture designed by **Phil Gear**.
+- Built for the **George B. Moody PhysioNet Challenge 2026**.
+- Released under the **MIT License**.
 
 ---
 
-## ⚖️ License & Clinical Disclaimer
+<div align="center">
 
-This software is released under the **MIT License**. Intended for clinical research and decision-support optimization. Always validate model outputs against qualified clinical expert judgment.
+*"Systems, Forces, Response.*
+*Stay focused."*
+
+— **Pocket Gull Strategy Blueprint**
+
+🕊️
+
+</div>
