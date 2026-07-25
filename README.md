@@ -144,6 +144,15 @@ To guarantee zero model failures prior to exporting `model.sav` for Docker conta
 
 ### 🚀 Quickstart & Execution Guide
 
+#### 🖥️ System Requirements
+
+| Resource / Layer | Minimum Requirement | Recommended Specification |
+| :--- | :--- | :--- |
+| **Python Runtime** | `Python 3.10+` | `Python 3.10` (`scikit-learn`, `xgboost`, `lightgbm`, `edfio`, `scipy`) |
+| **Memory (RAM)** | `4 GB` (Inference) / `8 GB` (Training batch) | `16 GB` (Parallel multi-core batch processing grid) |
+| **CPU Cores** | 2 Cores | 4+ Cores (`joblib.Parallel` decimation engine) |
+| **Docker Container Environment** | Linux Debian / Python 3.10-buster | `FROM python:3.10.1-buster` (No GPU required) |
+
 #### 1. Generate Synthetic PSG EDF Waveform Dataset
 ```bash
 python create_synthetic_psg_edf.py
