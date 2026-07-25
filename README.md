@@ -15,7 +15,7 @@
 
 Official Machine Learning Architecture & Competition Entry for **Cognitive Impairment Prediction from Polysomnography (PSG)** in the George B. Moody PhysioNet Challenge 2026.
 
-[Read Strategic Blueprint](./STRATEGY_BLUEPRINT.md) • [View Live Care Engine](https://pocketgull.app)
+[Read Strategic Blueprint](./STRATEGY_BLUEPRINT.md) • [View Live Care Engine](https://pocketgull.app) • [Clinical Sleep Twin Component](https://github.com/philgear/pocketgull/blob/main/src/components/clinical-sleep-twin-dashboard.component.ts)
 
 </div>
 
@@ -33,6 +33,7 @@ Pocket Gull introduces a **100-feature Multi-Modal Sleep Intelligence Engine** c
 * **Memory & Time Armor:** 100Hz signal decimation and parallel CPU core batch extraction for strict Docker compliance.
 * **Fuzzy Regex Channel Lookup ("Dictionary of Babel"):** Multi-hospital site lead harmonization.
 * **Distribution-Free 95% Conformal Intervals:** Rigorous test-time uncertainty bounds.
+* **Angular Standalone Frontend Integration:** Connected directly to the [`ClinicalSleepTwinDashboardComponent`](https://github.com/philgear/pocketgull/blob/main/src/components/clinical-sleep-twin-dashboard.component.ts), [`AnalysisReportComponent`](https://github.com/philgear/pocketgull/blob/main/src/components/analysis-report.component.ts), and [`OrigamiPapercraftDecorationsComponent`](https://github.com/philgear/pocketgull/blob/main/src/components/origami-papercraft-decorations.component.ts) in the main [`philgear/pocketgull`](https://github.com/philgear/pocketgull) repository.
 
 ---
 
