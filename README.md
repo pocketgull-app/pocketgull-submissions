@@ -15,7 +15,7 @@
 
 Official Machine Learning Architecture & Competition Entry for **Cognitive Impairment Prediction from Polysomnography (PSG)** in the George B. Moody PhysioNet Challenge 2026.
 
-[Read Strategic Blueprint](./STRATEGY_BLUEPRINT.md) • [View Live Care Engine](https://pocketgull.web.app)
+[Read Strategic Blueprint](./STRATEGY_BLUEPRINT.md) • [View Live Care Engine](https://pocketgull.app)
 
 </div>
 
