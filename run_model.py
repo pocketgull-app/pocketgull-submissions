@@ -66,7 +66,7 @@ def run(args):
         
         if args.verbose:
             width = len(str(num_records))
-            print(f'- {i+1:>{width}}/{num_records}: {patient_id} (Session {session_id})...')
+            print(f'- {i+1:>{width}}/{num_records}: record {i+1} (Session {session_id})...')
 
         # Allow or disallow the model to fail on parts of the data; this can be helpful for debugging.
         try:
