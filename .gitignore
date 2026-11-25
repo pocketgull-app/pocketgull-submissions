@@ -17,3 +17,6 @@ __pycache__/
 env/
 .pytest_cache/
 .DS_Store
+
+# Sandboxing descriptor (local host tooling)
+.sandbox.json

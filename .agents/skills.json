@@ -1,0 +1,7 @@
+{
+  "inherits": [
+    {
+      "path": "~/.gemini/config/skills/shared-constitution.json"
+    }
+  ]
+}
