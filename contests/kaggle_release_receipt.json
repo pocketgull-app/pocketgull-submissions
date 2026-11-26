@@ -1,0 +1,41 @@
+{
+  "semver": "1.41.2",
+  "gitSha": "436c1a6b",
+  "zenodoDoi": "10.5281/zenodo.18882512",
+  "dcoSignOff": "Signed-off-by: Phillip Gear <dpo@pocketgull.app>",
+  "bigQuerySinkTable": "gen-lang-client-0540208645.kaggle_experiments.runs",
+  "beyonceAudit": {
+    "exists": true,
+    "rowCount": 3,
+    "nanOrInfCount": 0,
+    "isValid": true,
+    "summary": "PASSED: 3 rows verified, 0 NaN/Inf values."
+  },
+  "tags": [
+    "agentic-ai",
+    "asymmetric-loss",
+    "biomedical",
+    "clinical-cds",
+    "computer-vision",
+    "deep-learning",
+    "dicom",
+    "fhir",
+    "gemini",
+    "group-kfold",
+    "healthcare",
+    "hipaa-safe-harbor",
+    "med-skeptic",
+    "medical-imaging",
+    "mri",
+    "onnx",
+    "physionet",
+    "pocketgull",
+    "pytorch",
+    "rsna",
+    "socratic-reasoning",
+    "synthetic",
+    "bigquery",
+    "zenodo-provenance"
+  ],
+  "timestampUtc": "2026-10-14T06:25:29.260219Z"
+}

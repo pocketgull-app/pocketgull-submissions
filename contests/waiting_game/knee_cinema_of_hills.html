@@ -1,0 +1,2967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Knee Slapper: Cinema of Hills | The 12 Knee Quests & Knee Rider</title>
+  <link rel="preconnect" href="https://font.pocketgull.app" crossorigin>
+  <link rel="preload" href="https://font.pocketgull.app/fonts/woff2/PocketGull-Fineliner-Core.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://font.pocketgull.app/fonts/woff2/PocketGull-Bold-Core.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://font.pocketgull.app/fonts.css?v=3.1.0" media="all">
+  <style>
+    @font-face {
+      font-family: 'PocketGull';
+      src: url('https://font.pocketgull.app/fonts/woff2/PocketGull-Fineliner-Core.woff2?v=3.1.0') format('woff2');
+      font-weight: 400 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PocketGull';
+      src: url('https://font.pocketgull.app/fonts/woff2/PocketGull-Bold-Core.woff2?v=3.1.0') format('woff2');
+      font-weight: 700 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PocketGull Mono';
+      src: url('https://font.pocketgull.app/fonts/woff2/PocketGullMono-Regular.woff2?v=3.3.0') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PocketGull Fallback';
+      src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
+      font-display: swap;
+      ascent-override: 96%;
+      descent-override: 24%;
+      line-gap-override: 10%;
+      size-adjust: 100%;
+    }
+    /* Direct Curves & Glassmorphism Global Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    :root {
+      --emerald-glow: #10b981;
+      --emerald-dark: #064e3b;
+      --spring-green: #34d399;
+      --golden-amber: #f59e0b;
+      --sun-rose: #df7a5e;
+      --sky-top: #140f12;
+      --sky-bottom: #241a1e;
+      --glass-bg: rgba(24, 18, 21, 0.78);
+      --glass-border: rgba(244, 236, 225, 0.16);
+      --text-main: #f4ece1;
+      --text-muted: #b5a698;
+      --squircle: 28px;
+    }
+
+    body {
+      background: #0d090b;
+      color: var(--text-main);
+      font-family: 'PocketGull', 'PocketGull Fallback', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-feature-settings: "tnum" 1, "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      touch-action: none;
+      transition: background 0.5s ease;
+    }
+
+    body.synthwave-mode {
+      background: #0d090b;
+    }
+
+    /* Fullscreen High-DPI Canvas */
+    #game-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+    /* Floating UI Container */
+    .hud-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 20px;
+    }
+
+    /* Direct Curve Pills */
+    .pill-btn, .pill-badge {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.25px;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(30, 41, 59, 0.90);
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 12px 36px rgba(16, 185, 129, 0.25);
+    }
+
+    .pill-btn:active {
+      transform: scale(0.96) translateY(0);
+    }
+
+    .pill-btn.active {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.5);
+    }
+
+    /* Knee Rider Red Neon Theme */
+    .pill-btn.rider-active {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+      color: #ffffff !important;
+      border-color: rgba(248, 113, 113, 0.6) !important;
+      box-shadow: 0 0 28px rgba(239, 68, 68, 0.65) !important;
+    }
+
+    .pill-badge {
+      cursor: default;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Green, Yellow, Red Clinical Difficulty Tiers */
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .tier-green {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.45);
+    }
+
+    .tier-yellow {
+      background: rgba(245, 158, 11, 0.2);
+      color: #facc15;
+      border: 1px solid rgba(250, 204, 21, 0.45);
+    }
+
+    .tier-red {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.45);
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1480px;
+      margin: 0 auto;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-pill {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(6, 78, 59, 0.4) 100%);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+    }
+
+    .brand-pill.rider {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.3) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+    }
+
+    .brand-icon {
+      font-size: 18px;
+      display: inline-block;
+      animation: gentle-wobble 3s infinite ease-in-out;
+    }
+
+    @keyframes gentle-wobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-6deg) scale(1.08); }
+      75% { transform: rotate(6deg) scale(1.08); }
+    }
+
+    /* Telemetry Deck */
+    .telemetry-deck {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-value {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .metric-value.rider {
+      color: #f87171;
+    }
+
+    /* Bottom Control Dock */
+    .bottom-dock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1480px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+
+    .hint-capsule {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.65);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .hint-key {
+      display: inline-block;
+      padding: 2px 7px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 700;
+      margin: 0 3px;
+    }
+
+    /* Speech Bubble / Knee Slapper Card Overlay */
+    #joke-banner {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      max-width: 600px;
+      width: calc(100% - 40px);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(52, 211, 153, 0.4);
+      border-radius: var(--squircle);
+      padding: 18px 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(16, 185, 129, 0.2);
+      z-index: 50;
+      pointer-events: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #joke-banner.rider {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(239, 68, 68, 0.55);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(239, 68, 68, 0.35);
+    }
+
+    #joke-banner.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .joke-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .joke-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+
+    .joke-badge.rider {
+      color: #f87171;
+      background: rgba(220, 38, 38, 0.2);
+    }
+
+    /* K.N.E.E. 2000 Voice Box (K.I.T.T. 3-bar Audio Visualizer) */
+    .kitt-voice-box {
+      display: none;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .kitt-voice-box.active {
+      display: inline-flex;
+    }
+
+    .kitt-bar {
+      width: 4px;
+      height: 100%;
+      background: #ef4444;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #ef4444;
+      animation: kitt-bounce 0.6s infinite ease-in-out alternate;
+    }
+
+    .kitt-bar:nth-child(2) { animation-delay: 0.2s; height: 75%; }
+    .kitt-bar:nth-child(3) { animation-delay: 0.4s; height: 50%; }
+
+    @keyframes kitt-bounce {
+      0% { transform: scaleY(0.3); opacity: 0.5; }
+      100% { transform: scaleY(1.0); opacity: 1; }
+    }
+
+    .joke-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 50%;
+      transition: color 0.2s;
+    }
+
+    .joke-close:hover {
+      color: #fff;
+    }
+
+    .joke-setup {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f1f5f9;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .joke-punchline {
+      font-size: 16px;
+      font-weight: 700;
+      color: #34d399;
+      line-height: 1.45;
+      padding: 10px 14px;
+      background: rgba(16, 185, 129, 0.08);
+      border-radius: 16px;
+      border-left: 3px solid #10b981;
+    }
+
+    .joke-punchline.rider {
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.1);
+      border-left-color: #ef4444;
+    }
+
+    .joke-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .joke-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .joke-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
+
+    /* Modal Windows */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 680px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      background: #0f172a;
+      border: 1.5px solid rgba(52, 211, 153, 0.3);
+      border-radius: var(--squircle);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(16, 185, 129, 0.15);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* 12 Knee Quests Level Cards Grid */
+    .quests-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-tab {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .filter-tab:hover, .filter-tab.active {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #34d399;
+    }
+
+    .quest-card {
+      background: rgba(30, 41, 59, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .quest-card:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(52, 211, 153, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .quest-card.tier-border-green:hover { border-color: #34d399; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2); }
+    .quest-card.tier-border-yellow:hover { border-color: #facc15; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2); }
+    .quest-card.tier-border-red:hover { border-color: #f87171; box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2); }
+
+    .quest-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .quest-num {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .quest-metaphor {
+      font-size: 13px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .quest-desc {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .quest-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Shift Roster List */
+    .roster-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+
+    .roster-item:hover {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(52, 211, 153, 0.3);
+      transform: translateX(4px);
+    }
+
+    .roster-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .roster-rank {
+      font-size: 18px;
+      font-weight: 800;
+      color: #34d399;
+      width: 28px;
+      text-align: center;
+    }
+
+    .roster-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #f8fafc;
+    }
+
+    .roster-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .roster-note {
+      font-size: 12px;
+      color: #38bdf8;
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .roster-stat {
+      text-align: right;
+    }
+
+    .roster-distance {
+      font-size: 16px;
+      font-weight: 800;
+      color: #facc15;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .roster-slaps {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Input Form for Logging a Shift */
+    .log-form {
+      margin-top: 18px;
+      padding: 16px;
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px dashed rgba(52, 211, 153, 0.3);
+      border-radius: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #34d399;
+    }
+
+    .form-select {
+      padding: 10px 14px;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    /* Screen-Slap Flash Effect */
+    #slap-flash {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.35);
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease-out;
+    }
+
+    #slap-flash.active {
+      opacity: 1;
+    }
+
+    /* Mobile Floating Action Button (Tap To Slap / Dive) */
+    .mobile-slap-zone {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hud-layer {
+        padding: 10px 12px;
+      }
+      .telemetry-deck .pill-badge:nth-child(2),
+      .telemetry-deck .pill-badge:nth-child(3) {
+        display: none;
+      }
+      .hint-capsule {
+        display: none;
+      }
+      .mobile-slap-zone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981, #059669);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+        color: #fff;
+        font-size: 26px;
+        pointer-events: auto;
+        cursor: pointer;
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+      }
+      .mobile-slap-zone.rider {
+        background: linear-gradient(135deg, #ef4444, #991b1b);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.7);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Canvas -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- Slap Flash Overlay -->
+  <div id="slap-flash"></div>
+
+  <!-- HUD Interface Layer -->
+  <div class="hud-layer">
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="nav-group">
+        <div id="brand-pill" class="pill-badge brand-pill">
+          <span id="brand-icon" class="brand-icon">🌱</span>
+          <span id="brand-title">Patty's Knee Slapper</span>
+        </div>
+
+        <!-- 🏥 THE 12 KNEE QUESTS (Waiting Room Patient Level System) -->
+        <button id="btn-quests" class="pill-btn active" title="Open The 12 Knee Quests (Waiting Room Patient Education & Levels)">
+          <span>🏥</span>
+          <span id="quests-btn-text">12 Knee Quests</span>
+        </button>
+
+        <!-- HERO SWITCHER: Happy Knee vs KNEE RIDER -->
+        <button id="btn-hero" class="pill-btn" title="Switch Hero Mode: Green Happy Knee ⟷ KNEE RIDER (K.N.E.E. 2000)">
+          <span id="hero-icon">🏎️</span>
+          <span id="hero-text">KNEE RIDER</span>
+        </button>
+
+        <button id="btn-mode" class="pill-btn" title="Toggle Auto-Cinema Screensaver vs Interactive Shift Play">
+          <span id="mode-icon">🎬</span>
+          <span id="mode-text">Auto-Cinema</span>
+        </button>
+
+        <!-- Pacing / Speed Control (Waiting Room Gentle Mode) -->
+        <button id="btn-pacing" class="pill-btn" title="Adjust Gliding Tempo: Serene (Calm) ⟷ Flow ⟷ Swift">
+          <span id="pacing-icon">🐢</span>
+          <span id="pacing-text">Serene (0.6x)</span>
+        </button>
+
+        <button id="btn-chrono" class="pill-btn" title="Circadian Sky Light (Dew / Sun / Dusk / PACS Midnight)">
+          <span id="chrono-icon">☀️</span>
+          <span id="chrono-text">Sunlight</span>
+        </button>
+      </div>
+
+      <!-- Telemetry Deck -->
+      <div class="telemetry-deck">
+        <!-- Active Quest Target Indicator -->
+        <div id="quest-hud-pill" class="pill-badge" style="display: none; background: rgba(16, 185, 129, 0.2); border-color: rgba(52, 211, 153, 0.4);">
+          <span id="quest-hud-icon">🎯</span>
+          <span id="quest-hud-label" class="metric-value">Quest Goal: 0/8</span>
+        </div>
+
+        <div class="pill-badge">
+          <span>Glide:</span>
+          <span id="stat-dist" class="metric-value">0 m</span>
+        </div>
+        <div class="pill-badge">
+          <span>Knee-Slaps:</span>
+          <span id="stat-slaps" class="metric-value">0</span>
+        </div>
+        <div class="pill-badge">
+          <span id="stat-special-label">Harmony:</span>
+          <span id="stat-special-val" class="metric-value">100%</span>
+        </div>
+      </div>
+
+      <!-- Right Utility Actions -->
+      <div class="nav-group">
+        <!-- Gamepad Indicator Pill -->
+        <div id="gamepad-pill" class="pill-badge" style="display: none; background: rgba(59, 130, 246, 0.2); border-color: rgba(96, 165, 250, 0.4);">
+          <span>🎮</span>
+          <span id="gamepad-name">Gamepad</span>
+        </div>
+
+        <button id="btn-sound" class="pill-btn" title="Synthesized Web Audio (Zen Chimes / 80s Synth Bass / Rimshot)">
+          <span id="sound-icon">🔔</span>
+          <span id="sound-text">Sound: On</span>
+        </button>
+
+        <button id="btn-roster" class="pill-btn" title="Collaborative Shift Roster & Breakroom Streaks">
+          <span>📋</span>
+          <span>Shift Board</span>
+        </button>
+
+        <button id="btn-jokes" class="pill-btn" title="View Unlocked Knee Slapper Joke Book">
+          <span>📖</span>
+          <span>Jokes</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Bottom Dock -->
+    <footer class="bottom-dock">
+      <div id="hint-capsule" class="hint-capsule">
+        <span>🎮</span>
+        <span id="hint-text">Hold <span class="hint-key">SPACE</span> / <span class="hint-key">CLICK</span> / Gamepad <span class="hint-key">A</span> to dive slopes &bull; Release to launch! Click Patty anytime for a <b>Knee Slapper</b>!</span>
+      </div>
+
+      <div class="nav-group">
+        <!-- Turbo Boost Action Button -->
+        <button id="btn-turbo" class="pill-btn" style="display: none; background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);" title="Turbo Boost Extension (Shift / T key or Gamepad RT/Y)">
+          <span>⚡</span>
+          <span>TURBO BOOST</span>
+        </button>
+
+        <a href="interactive_3d_knee_slicer.html" class="pill-btn" title="Return to Clinical 3D Knee Anatomy & Slicer">
+          <span>🔬</span>
+          <span>Back to 3D Anatomy</span>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile Floating Slap Button -->
+  <div id="btn-mobile-slap" class="mobile-slap-zone" title="Tap to Slap!">
+    🦵
+  </div>
+
+  <!-- Flow-Preserving Quest Victory Toast Banner -->
+  <div id="quest-complete-flow-banner" style="display: none; position: absolute; top: 76px; right: 20px; z-index: 55; align-items: center; gap: 12px; background: rgba(6, 78, 59, 0.94); border: 1.5px solid #34d399; border-radius: 9999px; padding: 10px 20px; box-shadow: 0 12px 32px rgba(16, 185, 129, 0.45); color: #ffffff; font-size: 13px; font-weight: 700; pointer-events: auto; transition: opacity 0.35s ease;">
+    <span>🏆</span>
+    <span id="flow-banner-title">Quest Fully Restored!</span>
+    <button onclick="this.parentElement.style.display='none'" style="background: none; border: none; color: #a7f3d0; cursor: pointer; font-size: 16px; font-weight: 800;">&times;</button>
+  </div>
+
+  <!-- Knee-Slapper Joke Popout Card -->
+  <div id="joke-banner">
+    <div class="joke-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span id="joke-badge" class="joke-badge">⚡ KNEE SLAPPER UNLOCKED!</span>
+        <div id="kitt-voice-box" class="kitt-voice-box">
+          <div class="kitt-bar"></div>
+          <div class="kitt-bar"></div>
+          <div class="kitt-bar"></div>
+        </div>
+      </div>
+      <button id="joke-close-btn" class="joke-close" title="Close Joke">&times;</button>
+    </div>
+    <div id="joke-setup-text" class="joke-setup">Why did the patella go to school?</div>
+    <div id="joke-punchline-text" class="joke-punchline">To get a little more flexible!</div>
+    <div class="joke-actions">
+      <button id="joke-share-btn" class="joke-btn">📋 Copy Joke</button>
+      <button id="joke-next-btn" class="joke-btn">🎲 Another Slapper!</button>
+    </div>
+  </div>
+
+  <!-- 🏥 THE 12 KNEE QUESTS MODAL (Waiting Room Patient Level Selector) -->
+  <div id="quests-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 780px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>🏥</span>
+          <span>The 12 Knee Quests (Waiting Room Patient Guide)</span>
+        </div>
+        <button id="quests-close-btn" class="joke-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+          Waiting to see your doctor or radiologist? Tap on your injury or condition below to play its dedicated quest, learn what happened in plain English, and get 3 smart questions for your visit!
+        </p>
+
+        <!-- Filter Bar: Green, Yellow, Red Tiers -->
+        <div class="quests-filter-bar">
+          <button class="filter-tab active" data-filter="all">All 12 Conditions</button>
+          <button class="filter-tab" data-filter="green">🟢 Gentle (Green Tiers 1–4)</button>
+          <button class="filter-tab" data-filter="yellow">🟡 Dynamic (Yellow Tiers 5–8)</button>
+          <button class="filter-tab" data-filter="red">🔴 Advanced (Red Tiers 9–12)</button>
+        </div>
+
+        <!-- Quests Grid -->
+        <div id="quests-list-container">
+          <!-- Dynamically populated from QUEST_LEVELS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📋 QUEST BRIEFING & DOCTOR CONSULTATION MODAL -->
+  <div id="quest-brief-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span id="brief-tier-pill" class="tier-badge tier-green">🟢 GENTLE</span>
+          <span id="brief-modal-title">Level 1: Joint Effusion</span>
+        </div>
+        <button id="brief-close-btn" class="joke-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 16px; font-weight: 700; color: #38bdf8; margin-bottom: 6px;" id="brief-metaphor">
+          "The Body's Natural Airbag"
+        </div>
+
+        <!-- 📐 ORTHOPEDIC REFERENCE DIAGRAM SPOTTER (Anterior Kneecap vs. Lateral Knee Locator) -->
+        <div style="background: rgba(6, 182, 212, 0.10); padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(6, 182, 212, 0.32); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="font-size: 11px; font-weight: 800; color: #22d3ee; text-transform: uppercase; letter-spacing: 0.06em;">
+              📐 Orthopedic Reference Diagram Spotter
+            </div>
+            <div id="brief-diagram-landmark" style="font-size: 12.5px; color: #f1f5f9; font-weight: 600; margin-top: 2px;">
+              Bony Landmark: Suprapatellar Pouch &amp; Femoral Trochlea
+            </div>
+          </div>
+          <span id="brief-diagram-view" style="font-size: 11px; font-weight: 700; color: #fde047; background: rgba(15, 23, 42, 0.85); padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(250, 204, 21, 0.4);">
+            Anterior Kneecap + Lateral Knee Views
+          </span>
+        </div>
+
+        <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 700; color: #34d399; text-transform: uppercase; margin-bottom: 4px;">
+            💡 What Happened to My Body?
+          </div>
+          <p id="brief-anatomy-explain" style="font-size: 13.5px; color: #e2e8f0; line-height: 1.45;">
+            <!-- Plain English explanation -->
+          </p>
+        </div>
+
+        <div style="background: rgba(16, 185, 129, 0.08); padding: 14px; border-radius: 16px; border: 1px solid rgba(52, 211, 153, 0.25); margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 700; color: #34d399; text-transform: uppercase; margin-bottom: 4px;">
+            🌱 How Your Body Heals
+          </div>
+          <p id="brief-healing-explain" style="font-size: 13px; color: #cbd5e1; line-height: 1.45;">
+            <!-- Reassuring healing science -->
+          </p>
+        </div>
+
+        <div style="background: rgba(56, 189, 248, 0.08); padding: 14px; border-radius: 16px; border: 1px solid rgba(56, 189, 248, 0.25); margin-bottom: 16px;">
+          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; margin-bottom: 6px;">
+            🩺 3 Smart Questions for Your Doctor Today
+          </div>
+          <ul id="brief-doctor-questions" style="font-size: 13px; color: #f1f5f9; padding-left: 18px; line-height: 1.5;">
+            <!-- 3 tailored questions -->
+          </ul>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+          <button id="btn-copy-doc-questions" class="pill-btn" style="background: rgba(255,255,255,0.08);">
+            📋 Copy Questions to Phone
+          </button>
+          <button id="btn-launch-quest" class="pill-btn active" style="padding: 10px 24px; font-size: 14px;">
+            ▶ Play Quest Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shift Harmony Roster Modal -->
+  <div id="roster-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>📋</span>
+          <span>Shift Harmony Roster & Downtime Streaks</span>
+        </div>
+        <button id="roster-close-btn" class="joke-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          No patients waiting on the floor or in the scanner? Leave an uplifting streak and note for the oncoming shift!
+        </p>
+        <div id="roster-list"></div>
+
+        <div class="log-form">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 10px;">
+            ✍️ Record Your Shift Streak
+          </div>
+          <div class="form-row">
+            <input type="text" id="input-roster-name" class="form-input" placeholder="Your Name or Initials" maxlength="24">
+            <select id="select-roster-role" class="form-select">
+              <option value="🩻 Radiology">🩻 Radiology</option>
+              <option value="🦴 Orthopedics">🦴 Orthopedics</option>
+              <option value="🩺 Nursing">🩺 Nursing</option>
+              <option value="🚑 Emergency">🚑 Emergency</option>
+              <option value="🧪 Lab / Pharmacy">🧪 Lab / Pharmacy</option>
+              <option value="☕ Night Shift">☕ Night Shift</option>
+              <option value="🏎️ Knee Rider Unit">🏎️ Knee Rider Unit</option>
+              <option value="✨ Radiologist Fellow">✨ Radiologist Fellow</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input type="text" id="input-roster-note" class="form-input" placeholder="Shift handover note / positive message..." maxlength="80">
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px;">
+            <button id="btn-save-roster" class="pill-btn active" style="padding: 8px 18px;">
+              💾 Save to Breakroom Board
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Joke Archive Modal -->
+  <div id="jokes-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>📖</span>
+          <span id="jokes-modal-title">Patty's Knee-Slapper Joke Book</span>
+        </div>
+        <button id="jokes-close-btn" class="joke-close">&times;</button>
+      </div>
+      <div class="modal-body" id="jokes-book-list"></div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. SYNTHESIZED WEB AUDIO ENGINE (ZERO EXTERNAL ASSETS / ZERO TRACKING)
+       ========================================================================= */
+    class KneeAudioEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.synthwaveInterval = null;
+        this.step = 0;
+        this.isRider = false;
+        this.initAudioContext();
+      }
+
+      initAudioContext() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioCtx();
+        }
+      }
+
+      resume() {
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      setRiderMode(isRider) {
+        this.isRider = isRider;
+        if (isRider && this.enabled) {
+          this.startSynthwaveBass();
+        } else {
+          this.stopSynthwaveBass();
+        }
+      }
+
+      // Whimsical Launch Boing (Happy Knee)
+      playLaunch(pitch = 320) {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(pitch, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(pitch * 2.2, this.ctx.currentTime + 0.28);
+
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.32);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.33);
+        } catch (e) {}
+      }
+
+      // Collectible Chime / Quest Item Chime
+      playChime(freq = 528) {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = this.isRider ? 'sawtooth' : 'triangle';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.45);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.46);
+        } catch (e) {}
+      }
+
+      // Quest Complete Fanfare
+      playQuestVictory() {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            this.playChime(freq);
+          }, idx * 110);
+        });
+      }
+
+      // KNEE RIDER Turbo Boost Turbine Jet Sound
+      playTurboBoostSound() {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.65);
+
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(400, now);
+          filter.frequency.exponentialRampToValueAtTime(4000, now + 0.65);
+          filter.Q.setValueAtTime(6.0, now);
+
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.72);
+        } catch (e) {}
+      }
+
+      // KNEE RIDER Scanner Sound (K.I.T.T. whoosh-whoosh sweep)
+      playScannerWhoosh() {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        try {
+          const bSize = this.ctx.sampleRate * 0.18;
+          const nBuffer = this.ctx.createBuffer(1, bSize, this.ctx.sampleRate);
+          const out = nBuffer.getChannelData(0);
+          for (let i = 0; i < bSize; i++) out[i] = Math.random() * 2 - 1;
+          const src = this.ctx.createBufferSource();
+          src.buffer = nBuffer;
+
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(600, now);
+          filter.frequency.exponentialRampToValueAtTime(1800, now + 0.09);
+          filter.frequency.exponentialRampToValueAtTime(500, now + 0.18);
+          filter.Q.setValueAtTime(5.0, now);
+
+          const gain = this.ctx.createGain();
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+          src.start(now);
+          src.stop(now + 0.19);
+        } catch (e) {}
+      }
+
+      // Driving 80s Synthwave Bass Arpeggio in D Minor
+      startSynthwaveBass() {
+        this.stopSynthwaveBass();
+        if (!this.enabled) return;
+        const notes = [
+          73.4, 73.4, 146.8, 73.4,
+          87.3, 73.4, 98.0, 73.4,
+          73.4, 73.4, 130.8, 73.4,
+          110.0, 98.0, 87.3, 65.4
+        ];
+        this.step = 0;
+        this.synthwaveInterval = setInterval(() => {
+          if (!this.enabled || !this.isRider) return;
+          const freq = notes[this.step % notes.length];
+          this.playSynthNote(freq);
+
+          if (this.step % 8 === 4) this.scheduleSnare(0.01);
+          if (this.step % 8 === 0) this.scheduleKick(0.01);
+
+          this.step++;
+        }, 125);
+      }
+
+      stopSynthwaveBass() {
+        if (this.synthwaveInterval) {
+          clearInterval(this.synthwaveInterval);
+          this.synthwaveInterval = null;
+        }
+      }
+
+      playSynthNote(freq) {
+        if (!this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        try {
+          const osc1 = this.ctx.createOscillator();
+          const osc2 = this.ctx.createOscillator();
+          const filter = this.ctx.createBiquadFilter();
+          const gain = this.ctx.createGain();
+
+          osc1.type = 'sawtooth';
+          osc2.type = 'square';
+          osc1.frequency.setValueAtTime(freq, now);
+          osc2.frequency.setValueAtTime(freq * 1.004, now);
+
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(1400, now);
+          filter.frequency.exponentialRampToValueAtTime(180, now + 0.11);
+          filter.Q.setValueAtTime(4.0, now);
+
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+
+          osc1.connect(filter);
+          osc2.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 0.12);
+          osc2.stop(now + 0.12);
+        } catch (e) {}
+      }
+
+      scheduleKick(offset = 0) {
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime + offset;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.frequency.setValueAtTime(120, now);
+          osc.frequency.exponentialRampToValueAtTime(35, now + 0.09);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.11);
+        } catch (e) {}
+      }
+
+      scheduleSnare(offset = 0) {
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime + offset;
+        try {
+          const bSize = this.ctx.sampleRate * 0.08;
+          const nBuffer = this.ctx.createBuffer(1, bSize, this.ctx.sampleRate);
+          const out = nBuffer.getChannelData(0);
+          for (let i = 0; i < bSize; i++) out[i] = Math.random() * 2 - 1;
+          const src = this.ctx.createBufferSource();
+          src.buffer = nBuffer;
+
+          const hp = this.ctx.createBiquadFilter();
+          hp.type = 'highpass';
+          hp.frequency.setValueAtTime(2200, now);
+
+          const gain = this.ctx.createGain();
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+          src.connect(hp);
+          hp.connect(gain);
+          gain.connect(this.ctx.destination);
+          src.start(now);
+          src.stop(now + 0.09);
+        } catch (e) {}
+      }
+
+      // THE CLASSIC KNEE SLAP + RIMSHOT (Thwack! Ba-dum-tss!)
+      playKneeSlap() {
+        if (!this.enabled || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        try {
+          const bufferSize = this.ctx.sampleRate * 0.08;
+          const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+          const whiteNoise = this.ctx.createBufferSource();
+          whiteNoise.buffer = noiseBuffer;
+
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(1400, now);
+          filter.Q.setValueAtTime(3.0, now);
+
+          const slapGain = this.ctx.createGain();
+          slapGain.gain.setValueAtTime(0.7, now);
+          slapGain.gain.exponentialRampToValueAtTime(0.01, now + 0.07);
+
+          whiteNoise.connect(filter);
+          filter.connect(slapGain);
+          slapGain.connect(this.ctx.destination);
+          whiteNoise.start(now);
+
+          const thumbOsc = this.ctx.createOscillator();
+          const thumbGain = this.ctx.createGain();
+          thumbOsc.frequency.setValueAtTime(260, now);
+          thumbOsc.frequency.exponentialRampToValueAtTime(40, now + 0.12);
+          thumbGain.gain.setValueAtTime(0.8, now);
+          thumbGain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+          thumbOsc.connect(thumbGain);
+          thumbGain.connect(this.ctx.destination);
+          thumbOsc.start(now);
+          thumbOsc.stop(now + 0.13);
+
+          this.scheduleDrum(now + 0.22, 180, 0.35, 0.08);
+          this.scheduleDrum(now + 0.36, 140, 0.45, 0.09);
+          this.scheduleCymbal(now + 0.50, 0.3);
+        } catch (e) {}
+      }
+
+      scheduleDrum(time, freq, gainVal, dur) {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.frequency.setValueAtTime(freq, time);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.4, time + dur);
+        gain.gain.setValueAtTime(gainVal, time);
+        gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(time);
+        osc.stop(time + dur + 0.01);
+      }
+
+      scheduleCymbal(time, dur) {
+        const bSize = this.ctx.sampleRate * dur;
+        const nBuffer = this.ctx.createBuffer(1, bSize, this.ctx.sampleRate);
+        const out = nBuffer.getChannelData(0);
+        for (let i = 0; i < bSize; i++) out[i] = Math.random() * 2 - 1;
+        const src = this.ctx.createBufferSource();
+        src.buffer = nBuffer;
+
+        const hp = this.ctx.createBiquadFilter();
+        hp.type = 'highpass';
+        hp.frequency.setValueAtTime(7500, time);
+
+        const cymGain = this.ctx.createGain();
+        cymGain.gain.setValueAtTime(0.4, time);
+        cymGain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+
+        src.connect(hp);
+        hp.connect(cymGain);
+        cymGain.connect(this.ctx.destination);
+        src.start(time);
+        src.stop(time + dur + 0.01);
+      }
+    }
+
+    /* =========================================================================
+       2. THE 12 KNEE QUESTS (WAITING ROOM CLINICAL EDUCATION SUITE)
+          Green (Gentle: 1–4) | Yellow (Dynamic: 5–8) | Red (Advanced: 9–12)
+       ========================================================================= */
+    const QUEST_LEVELS = [
+      // 🟢 GREEN TIERS (1–4: Gentle Relief & Acute Management)
+      {
+        id: 1,
+        tier: 'green',
+        tierLabel: '🟢 GENTLE',
+        title: 'Level 1: Joint Effusion',
+        structure: 'Synovial Fluid Capsule',
+        metaphor: "The Body's Natural Airbag",
+        anatomyExplain: "When the knee gets irritated or twisted, it creates extra synovial fluid. This swelling isn't an enemy—it acts like an emergency airbag to protect internal cartilage and deliver healing cells.",
+        healingExplain: "Resting the leg elevated and doing gentle non-weight-bearing ankle pumps stimulates the lymphatic system to safely absorb and circulate fluid without harsh drugs.",
+        doctorQuestions: [
+          "Is this swelling protecting an acute twist or gradual inflammation?",
+          "Should I use cold packs, compression wrap, or gentle elevation at home?",
+          "Can I do gentle quad sets while seated to help the lymphatic system pump fluid out?"
+        ],
+        objectiveName: "Synovial Drops",
+        targetCount: 8,
+        terrainAmp: 45,
+        terrainWave: 920,
+        itemColor: '#38bdf8'
+      },
+      {
+        id: 2,
+        tier: 'green',
+        tierLabel: '🟢 GENTLE',
+        title: 'Level 2: MCL Sprain (Grade 1/2)',
+        structure: 'Medial Collateral Ligament',
+        metaphor: 'The Inner Shield & Seatbelt',
+        anatomyExplain: "The MCL is a wide, tough band on the inside of your knee that stops your leg from bowing inward when knocked from the outside. Unlike inner ligaments, the MCL has a fantastic rich blood supply!",
+        healingExplain: "Because of its generous blood flow, the vast majority of MCL sprains heal completely without surgery through early protected movement and targeted quad strengthening.",
+        doctorQuestions: [
+          "What grade is my MCL sprain (Grade 1, 2, or 3)?",
+          "Do I need a hinged brace to protect lateral movement while walking?",
+          "How soon can I start stationary cycling or physical therapy?"
+        ],
+        objectiveName: "Capillary Healing Droplets",
+        targetCount: 8,
+        terrainAmp: 50,
+        terrainWave: 880,
+        itemColor: '#f43f5e'
+      },
+      {
+        id: 3,
+        tier: 'green',
+        tierLabel: '🟢 GENTLE',
+        title: "Level 3: Runner's Knee / Chondromalacia",
+        structure: 'Patellofemoral Cartilage',
+        metaphor: 'The Polished Ice Rink',
+        anatomyExplain: "Articular cartilage under your kneecap is 5 times smoother than ice on ice. When it softens or gets slightly irritated, the kneecap wanders out of its smooth femoral groove.",
+        healingExplain: "Strengthening the hip stabilizers (gluteus medius) and inner quad keeps the kneecap gliding centered in the groove like a high-speed train on smooth rails.",
+        doctorQuestions: [
+          "Are weak hip stabilizers letting my kneecap track slightly off-center?",
+          "What quad-strengthening exercises won't compress my kneecap?",
+          "Would patellar taping or shoe orthotics help in the short term?"
+        ],
+        objectiveName: "Glide Crystals",
+        targetCount: 8,
+        terrainAmp: 48,
+        terrainWave: 860,
+        itemColor: '#06b6d4'
+      },
+      {
+        id: 4,
+        tier: 'green',
+        tierLabel: '🟢 GENTLE',
+        title: 'Level 4: Patellar Tendonitis',
+        structure: 'Patellar Tendon / Extensor Mechanism',
+        metaphor: 'The Elastic Bungee Cord',
+        anatomyExplain: "The patellar tendon is a thick rubber-band-like cable connecting your kneecap to your shin. Repetitive jumping or rapid mileage increases can cause micro-strain and tenderness.",
+        healingExplain: "Tendons hate sudden rest followed by sudden jumps; they love progressive, isometric holds (like 45-second wall sits) which relieve pain and stimulate collagen realignment.",
+        doctorQuestions: [
+          "Should I do isometric wall-sits to reduce tendon pain before exercising?",
+          "What jump or running volume is safe for me right now?",
+          "Is a patellar tendon strap or band helpful for stairs?"
+        ],
+        objectiveName: "Tendon Collagen Bundles",
+        targetCount: 8,
+        terrainAmp: 52,
+        terrainWave: 840,
+        itemColor: '#facc15'
+      },
+
+      // 🟡 YELLOW TIERS (5–8: Dynamic Stability & Meniscal Shock Absorption)
+      {
+        id: 5,
+        tier: 'yellow',
+        tierLabel: '🟡 DYNAMIC',
+        title: 'Level 5: Medial Meniscus Tear',
+        structure: 'Medial Meniscal Cartilage',
+        metaphor: 'The Inner Sneaker Insole',
+        anatomyExplain: "Your medial meniscus is a C-shaped fibrocartilage shock absorber. Like a high-end sneaker insole, it cushions up to 50% of your body weight during squats, turns, and steps.",
+        healingExplain: "The outer rim of the meniscus (the 'Red-Red' vascular zone) has direct blood vessels that can heal or be sutured. Even degenerative tears often become completely asymptomatic with physical therapy!",
+        doctorQuestions: [
+          "Is my tear in the outer 'Red-Red' vascular zone (which can heal) or the inner white zone?",
+          "Does this tear catch, lock, or prevent me from straightening my knee?",
+          "Can we try 6 to 8 weeks of targeted physical therapy before considering arthroscopy?"
+        ],
+        objectiveName: "Fibrocartilage Sponges",
+        targetCount: 10,
+        terrainAmp: 56,
+        terrainWave: 820,
+        itemColor: '#10b981'
+      },
+      {
+        id: 6,
+        tier: 'yellow',
+        tierLabel: '🟡 DYNAMIC',
+        title: 'Level 6: Lateral Meniscus Tear',
+        structure: 'Lateral Meniscal Cartilage',
+        metaphor: 'The Mobile Outer Shock Absorber',
+        anatomyExplain: "The lateral meniscus is more circular and mobile than the medial side, sliding back and forth to absorb impact during quick pivots, direction changes, and downhill strides.",
+        healingExplain: "Low-impact cyclic motion (like stationary cycling or pool exercise) pumps synovial fluid across the meniscus, providing continuous oxygen and nutrients to maintain tissue hydration.",
+        doctorQuestions: [
+          "How does lateral meniscus treatment differ from medial tears?",
+          "What low-impact exercises will keep synovial fluid bathing the cushion?",
+          "Are deep squats or kneeling safe for my specific tear pattern?"
+        ],
+        objectiveName: "Lateral Buffer Pads",
+        targetCount: 10,
+        terrainAmp: 58,
+        terrainWave: 800,
+        itemColor: '#a855f7'
+      },
+      {
+        id: 7,
+        tier: 'yellow',
+        tierLabel: '🟡 DYNAMIC',
+        title: 'Level 7: Bone Bruise / Contusion',
+        structure: 'Subchondral Trabecular Bone',
+        metaphor: 'The Micro-Honeycomb Sponge',
+        anatomyExplain: "Bones aren't solid porcelain; inside they are a living, flexible lattice of microscopic struts. A heavy impact micro-fractures these internal struts, creating bone marrow swelling.",
+        healingExplain: "Bone bruises heal from the inside out over 6 to 12 weeks. Giving the bone time without high-impact pounding allows osteoblasts to rebuild the microscopic honeycomb struts stronger than before.",
+        doctorQuestions: [
+          "Why does a bone bruise take 6 to 12 weeks to heal compared to normal bruises?",
+          "How much weight-bearing or walking is recommended while the bone marrow heals?",
+          "Are there nutritional factors (Vitamin D, calcium, protein) that support bone recovery?"
+        ],
+        objectiveName: "Trabecular Honeycomb Seeds",
+        targetCount: 10,
+        terrainAmp: 60,
+        terrainWave: 780,
+        itemColor: '#fbbf24'
+      },
+      {
+        id: 8,
+        tier: 'yellow',
+        tierLabel: '🟡 DYNAMIC',
+        title: 'Level 8: PCL Tear / Sprain',
+        structure: 'Posterior Cruciate Ligament',
+        metaphor: 'The Reverse Anchor Cable',
+        anatomyExplain: "The PCL is the thick anchor cable holding your shin bone from sliding backward toward your calf. It is commonly strained by hitting a car dashboard or landing hard on a bent knee.",
+        healingExplain: "The PCL has an extraordinary intrinsic healing capacity! In many cases, specialized dynamic bracing and aggressive quad strengthening stabilize the shin completely without surgical reconstruction.",
+        doctorQuestions: [
+          "Can my PCL heal without surgery using non-operative dynamic bracing?",
+          "Which hamstring exercises should I avoid temporarily so the shin doesn't pull backward?",
+          "When can I begin closed-chain quad strengthening?"
+        ],
+        objectiveName: "Quad Torque Anchors",
+        targetCount: 10,
+        terrainAmp: 62,
+        terrainWave: 760,
+        itemColor: '#f97316'
+      },
+
+      // 🔴 RED TIERS (9–12: High Acuity, Complex Reconstruction & Long-Term Joint)
+      {
+        id: 9,
+        tier: 'red',
+        tierLabel: '🔴 ADVANCED',
+        title: 'Level 9: Complete ACL Tear',
+        structure: 'Anterior Cruciate Ligament',
+        metaphor: 'The Pivot Canyon & Forward Brake',
+        anatomyExplain: "The ACL is the primary forward brake cable inside your joint, stopping the shin from sliding forward or twisting out of control when planting or pivoting.",
+        healingExplain: "Modern ACL restoration uses minimally invasive techniques with robust biological scaffolds (like diatom biosilica anchors) paired with targeted pre-habilitation to guarantee a strong, stable return to play.",
+        doctorQuestions: [
+          "What are the pros and cons of autograft (patellar tendon, quad, hamstring) vs allograft for my activity level?",
+          "How important is 'pre-hab' to restore full extension and reduce swelling before surgery?",
+          "What is my realistic timeline for returning to cutting and pivoting sports?"
+        ],
+        objectiveName: "Collagen Graft Strands",
+        targetCount: 12,
+        terrainAmp: 68,
+        terrainWave: 740,
+        itemColor: '#ef4444'
+      },
+      {
+        id: 10,
+        tier: 'red',
+        tierLabel: '🔴 ADVANCED',
+        title: 'Level 10: LCL & Posterolateral Corner',
+        structure: 'Lateral Collateral & Popliteus Complex',
+        metaphor: 'The Outer Fortress Towers',
+        anatomyExplain: "The LCL and posterolateral corner form the outer defense wall preventing the knee from twisting outward or bowing into a severe 'bowleg' posture.",
+        healingExplain: "Accurate physical examination and early stabilization protect the nearby peroneal nerve and restore rotational equilibrium for confident, stable walking.",
+        doctorQuestions: [
+          "Did my outer injury affect the peroneal nerve (any numbness or foot drop)?",
+          "Is the posterolateral corner (PLC) intact or involved with the LCL?",
+          "Does this require surgical repair or can a specialized brace stabilize it?"
+        ],
+        objectiveName: "Rotational Balance Gyros",
+        targetCount: 12,
+        terrainAmp: 66,
+        terrainWave: 750,
+        itemColor: '#ec4899'
+      },
+      {
+        id: 11,
+        tier: 'red',
+        tierLabel: '🔴 ADVANCED',
+        title: 'Level 11: Quadriceps Tendon Rupture / Strain',
+        structure: 'Quadriceps Muscle-Tendon Junction',
+        metaphor: 'The Big Engine Cable',
+        anatomyExplain: "The quadriceps tendon is the heavy transmission cable transferring power from your 4 massive thigh muscles to straighten your leg and lift your body out of deep chairs.",
+        healingExplain: "Following surgical repair or high-grade rehab, progressive closed-chain strength programs systematically rebuild muscle bulk and neuromuscular control.",
+        doctorQuestions: [
+          "Is the tendon fully or partially torn, and what is the surgical window if full?",
+          "How long will the knee need to remain locked in full extension during early healing?",
+          "When can we begin passive range-of-motion exercises?"
+        ],
+        objectiveName: "Quad Power Cells",
+        targetCount: 12,
+        terrainAmp: 70,
+        terrainWave: 720,
+        itemColor: '#f43f5e'
+      },
+      {
+        id: 12,
+        tier: 'red',
+        tierLabel: '🔴 ADVANCED',
+        title: 'Level 12: Osteoarthritis / The Long Glide',
+        structure: 'Full Joint Articular Cartilage',
+        metaphor: 'The Silver Glider: Movement is Medicine',
+        anatomyExplain: "Articular cartilage is a living sponge with zero blood vessels—it eats only through cyclic compression and release. Sitting motionless starves it; rhythmic, low-impact gliding nourishes it!",
+        healingExplain: "Movement is medicine! Low-impact activities (swimming, cycling, walking) flood the joint with protective lubricants, strengthen supporting muscles, and dramatically reduce joint stiffness.",
+        doctorQuestions: [
+          "What low-impact activities (swimming, cycling, walking on grass) are best for my joint stage?",
+          "Could unloader braces, physical therapy, or targeted injections relieve pain?",
+          "What are the milestones for knowing if or when joint replacement makes sense?"
+        ],
+        objectiveName: "Synovial Nourishment Spheres",
+        targetCount: 15,
+        terrainAmp: 46,
+        terrainWave: 980,
+        itemColor: '#facc15'
+      }
+    ];
+
+    /* =========================================================================
+       3. GAMEPAD CONTROLLER ENGINE (XBOX, PLAYSTATION, SWITCH, ADAPTIVE)
+       ========================================================================= */
+    class GamepadManager {
+      constructor() {
+        this.gamepadIndex = null;
+        this.lastButtons = {};
+        this.init();
+      }
+
+      init() {
+        window.addEventListener("gamepadconnected", (e) => {
+          this.gamepadIndex = e.gamepad.index;
+          const name = e.gamepad.id.toLowerCase().includes("xbox") ? "Xbox Controller" :
+                       e.gamepad.id.toLowerCase().includes("dual") || e.gamepad.id.toLowerCase().includes("playstation") ? "PlayStation Controller" :
+                       e.gamepad.id.toLowerCase().includes("switch") || e.gamepad.id.toLowerCase().includes("joy-con") ? "Switch Controller" : "Gamepad";
+          document.getElementById('gamepad-name').textContent = name;
+          document.getElementById('gamepad-pill').style.display = 'inline-flex';
+          this.rumble(200, 0.4, 0.4);
+        });
+
+        window.addEventListener("gamepaddisconnected", (e) => {
+          if (this.gamepadIndex === e.gamepad.index) {
+            this.gamepadIndex = null;
+            document.getElementById('gamepad-pill').style.display = 'none';
+          }
+        });
+      }
+
+      rumble(durationMs = 120, weak = 0.5, strong = 0.5) {
+        if (this.gamepadIndex === null) return;
+        const gp = navigator.getGamepads ? navigator.getGamepads()[this.gamepadIndex] : null;
+        if (gp && gp.vibrationActuator) {
+          try {
+            gp.vibrationActuator.playEffect("dual-rumble", {
+              startDelay: 0,
+              duration: durationMs,
+              weakMagnitude: weak,
+              strongMagnitude: strong
+            });
+          } catch(e) {}
+        }
+      }
+
+      poll(onDive, onSlap, onTurbo) {
+        if (this.gamepadIndex === null) return;
+        const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+        const gp = gamepads[this.gamepadIndex];
+        if (!gp) return;
+
+        // Button 0 (A / Cross / Switch B): Dive
+        const btnA = gp.buttons[0]?.pressed;
+        // Button 1 (B / Circle) or Button 2 (X / Square): Knee Slap
+        const btnSlap = gp.buttons[1]?.pressed || gp.buttons[2]?.pressed;
+        // Button 7 (RT / R2) or Button 3 (Y / Triangle): Turbo Boost
+        const btnTurbo = gp.buttons[3]?.pressed || gp.buttons[7]?.pressed;
+
+        // Left Analog Stick Down
+        const stickY = gp.axes[1] || 0;
+        const stickDive = stickY > 0.4;
+
+        onDive(btnA || stickDive);
+
+        if (btnSlap && !this.lastButtons.slap) {
+          onSlap();
+          this.rumble(150, 0.9, 0.4);
+        }
+
+        if (btnTurbo && !this.lastButtons.turbo) {
+          onTurbo();
+          this.rumble(240, 0.5, 0.8);
+        }
+
+        this.lastButtons.slap = btnSlap;
+        this.lastButtons.turbo = btnTurbo;
+      }
+    }
+
+    /* =========================================================================
+       4. JOKES REPOSITORY
+       ========================================================================= */
+    const PATTY_JOKES = [
+      { setup: "Why did the patella go to medical school?", punchline: "To get a little more flexible and find its groove in the trochlea!", category: "🦴 Orthopedics" },
+      { setup: "What did the femur say to the patella before running the marathon?", punchline: "'Don't worry, I've got your back — just keep tracking straight!'", category: "🦴 Orthopedics" },
+      { setup: "Why are orthopedic surgeons always so calm and collected?", punchline: "Because nothing gets under their articular cartilage!", category: "🩺 Hospital Life" },
+      { setup: "What is a radiologist's absolute favorite beverage during a night shift?", punchline: "A piping hot mug of Contrast-Tea!", category: "🩻 Radiology" },
+      { setup: "Why did the ACL break up with the PCL?", punchline: "Because they were always crossing each other!", category: "🦴 Orthopedics" },
+      { setup: "Why did the radiologist bring an umbrella to the MRI suite?", punchline: "They heard there was a strong gradient field with scattered proton spins!", category: "🩻 Radiology" },
+      { setup: "What did the medial meniscus say to the lateral meniscus during a pivot?", punchline: "'Hang in there buddy, we're absorbing high shock today!'", category: "🦴 Orthopedics" },
+      { setup: "Why couldn't the skeleton start a fight at the hospital party?", punchline: "He had no guts, and his knees were too busy doing the twist!", category: "✨ Anatomy" },
+      { setup: "What is a knee's favorite genre of music?", punchline: "Hip-Hop... but only with proper quadriceps support!", category: "🌱 Dad Jokes" },
+      { setup: "Why did the nurse bring a red marker to the triage desk?", punchline: "In case they had to draw blood in 4K resolution!", category: "🩺 Nursing" },
+      { setup: "What did the synovial fluid say during cold morning rounds?", punchline: "'Just warming up my viscosity, ready to glide!'", category: "✨ Physiology" },
+      { setup: "How does a happy knee answer the phone when clinic calls?", punchline: "'Yellow-cartilage! How may I articulate today?'", category: "🌱 Dad Jokes" },
+      { setup: "What do you call two knee surgeons who agree on everything?", punchline: "A joint decision!", category: "🦴 Orthopedics" },
+      { setup: "Why do knees make the best comedians in the entire hospital?", punchline: "Because every single one of their jokes is a genuine Knee-Slapper!", category: "🌱 Classic" }
+    ];
+
+    const KNEE_RIDER_JOKES = [
+      { setup: "Michael, I have scanned the breakroom on floor 3...", punchline: "The last blueberry muffin has been compromised. Commencing tactical pursuit.", category: "🏎️ K.N.E.E. 2000" },
+      { setup: "Why does K.N.E.E. 2000 never experience ligament tears?", punchline: "Dual-redundant carbon fiber composite tracking and molecular defense shielding, Michael.", category: "🏎️ K.N.E.E. 2000" },
+      { setup: "What is K.N.E.E.'s preferred diagnostic sequence on the MRI scanner?", punchline: "Turbo Spin Echo, Michael. Naturally. Everything I do is Turbo.", category: "🏎️ K.N.E.E. 2000" },
+      { setup: "Why did K.N.E.E. refuse to scan the patient's elbow?", punchline: "'I only ride for lower extremity joint justice, Michael. Foundation directives.'", category: "🏎️ K.N.E.E. 2000" },
+      { setup: "Michael, my optical sensors indicate an acute emergency in PACS Reading Room 4...", punchline: "The espresso roast carafe is at 4% capacity. Engaging Turbo Boost immediately.", category: "🏎️ K.N.E.E. 2000" },
+      { setup: "How does K.N.E.E. calibrate its condylar hill flight trajectory?", punchline: "With 99.8% algorithmic perfection. Human manual descent is mathematically chaotic, Michael.", category: "🏎️ K.N.E.E. 2000" }
+    ];
+
+    /* =========================================================================
+       5. CIRCADIAN & SYNTHWAVE PALETTES
+       ========================================================================= */
+    const CIRCADIAN_MODES = [
+      { id: 'daylight', name: 'Sunlight', icon: '☀️', skyTop: '#0ea5e9', skyBottom: '#bae6fd', sunColor: '#fef08a', hill1: 'rgba(52, 211, 153, 0.35)', hill2: 'rgba(16, 185, 129, 0.65)', hill3: '#059669', wireframe: false },
+      { id: 'golden', name: 'Golden Hour', icon: '🌅', skyTop: '#7c2d12', skyBottom: '#fdba74', sunColor: '#f97316', hill1: 'rgba(180, 83, 9, 0.35)', hill2: 'rgba(16, 185, 129, 0.55)', hill3: '#065f46', wireframe: false },
+      { id: 'midnight', name: 'PACS Midnight', icon: '🌙', skyTop: '#020617', skyBottom: '#0f172a', sunColor: '#38bdf8', hill1: 'rgba(15, 23, 42, 0.8)', hill2: 'rgba(6, 78, 59, 0.6)', hill3: '#064e3b', wireframe: false },
+      { id: 'dew', name: 'Morning Dew', icon: '🌿', skyTop: '#0d9488', skyBottom: '#ccfbf1', sunColor: '#fef9c3', hill1: 'rgba(45, 212, 191, 0.35)', hill2: 'rgba(13, 148, 136, 0.65)', hill3: '#0f766e', wireframe: false }
+    ];
+
+    const SYNTHWAVE_PALETTE = {
+      id: 'synthwave', name: 'Cyber Outrun', icon: '🏎️', skyTop: '#090514', skyBottom: '#2d0838', sunColor: '#f43f5e',
+      hill1: 'rgba(236, 72, 153, 0.25)', hill2: 'rgba(168, 85, 247, 0.45)', hill3: '#180728', gridColor: '#06b6d4', wireframe: true
+    };
+
+    /* =========================================================================
+       6. MAIN ENGINE & KINEMATICS
+       ========================================================================= */
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const audio = new KneeAudioEngine();
+    const gamepads = new GamepadManager();
+
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Core States
+    let heroMode = 'patty';
+    let isCinemaMode = true;
+    let currentChronoIndex = 0;
+    let isDiving = false;
+    let isTurbo = false;
+    let turboCharge = 100;
+    let distanceMeters = 0;
+    let kneeSlapsCount = 0;
+    // --- 🌊 SALUTOGENIC FLOW STATE & STRATEGIC KNEE SLAP SCREEN-BOMB ---
+    let flowCombo = 0;
+    let isFlowActive = false;
+    let flowTimer = 0;
+    let lastLandType = 'none'; // 'downslope', 'upslope'
+    let slapCooldownTimer = 0; // 10s cooldown
+    let shockwaveRadius = 0;
+    let isShockwaveActive = false;
+    let pendingCompletedQuest = null; // For non-interruptive banner
+    let harmonyMeter = 100;
+
+    // Active Quest Level State
+    let activeQuest = null; // null = free flight
+    let questCollected = 0;
+
+    // Pacing & Speed Controller (Calm Waiting Room Standard)
+    const PACING_MODES = [
+      { name: "Serene (0.6x)", icon: "🐢", mult: 0.60 },
+      { name: "Gentle (0.8x)", icon: "🌿", mult: 0.80 },
+      { name: "Flow (1.0x)", icon: "🚶", mult: 1.0 },
+      { name: "Swift (1.3x)", icon: "🏎️", mult: 1.3 }
+    ];
+    let currentPacingIdx = 0; // Starts in Serene (0.6x)
+    let pacingMultiplier = PACING_MODES[0].mult;
+
+    const avatar = {
+      x: 220,
+      y: 300,
+      radius: 28,
+      vx: 1.6, // Calm, smooth, gentle drift
+      vy: 0,
+      angle: 0,
+      squashX: 1,
+      squashY: 1,
+      expression: 'happy',
+      blushing: true,
+      lastSlapTime: 0,
+      scannerPos: 0,
+      scannerDir: 1
+    };
+
+    // Parallax Hills: Wide, majestic, slow-moving condylar curves
+    const hills = [
+      { amplitude: 110, wavelength: 1400, speed: 0.12, offset: 0, baseY: 0.60 },
+      { amplitude: 80, wavelength: 980, speed: 0.25, offset: 0, baseY: 0.68 },
+      { amplitude: 60, wavelength: 700, speed: 0.45, offset: 0, baseY: 0.76 }
+    ];
+
+    const collectibles = [];
+    const particles = [];
+    const confetti = [];
+
+    function getForegroundHillY(worldX) {
+      const h = hills[2];
+      const normalizedX = (worldX + h.offset);
+      const yBase = height * h.baseY;
+      return yBase +
+             Math.sin(normalizedX / (h.wavelength / (Math.PI * 2))) * (h.amplitude * 0.75) +
+             Math.cos(normalizedX / (h.wavelength * 0.45)) * (h.amplitude * 0.25);
+    }
+
+    function getForegroundSlope(worldX) {
+      const delta = 4;
+      const y1 = getForegroundHillY(worldX - delta);
+      const y2 = getForegroundHillY(worldX + delta);
+      return (y2 - y1) / (delta * 2);
+    }
+
+    function spawnCollectibles() {
+      collectibles.length = 0;
+      // Golden Path: Group collectibles in 4 fluid ballistic flight arcs
+      for (let arc = 0; arc < 4; arc++) {
+        const startX = avatar.x + 350 + arc * 720;
+        const arcCount = 5;
+        for (let i = 0; i < arcCount; i++) {
+          const t = i / (arcCount - 1); // 0.0 to 1.0 along the jump
+          const cx = startX + i * 90;
+          // Parabolic arc matching optimal launch flight trajectory
+          const groundBase = getForegroundHillY(cx);
+          const apexHeight = 160 + (i === 2 ? 30 : 0); // Apex at center
+          const arcHeight = Math.sin(t * Math.PI) * apexHeight + 50;
+          const cy = groundBase - arcHeight;
+
+          const isApex = (i === Math.floor(arcCount / 2));
+          collectibles.push({
+            x: cx,
+            y: cy,
+            radius: isApex ? 16 : 12,
+            type: activeQuest ? 'quest' : (isApex ? 'synovial' : 'biosilica'),
+            isApex: isApex,
+            collected: false,
+            pulse: i * 0.4
+          });
+        }
+      }
+    }
+    spawnCollectibles();
+
+    /* =========================================================================
+       7. JOKES, SLAPS & QUEST HUD
+       ========================================================================= */
+    const jokeBanner = document.getElementById('joke-banner');
+    const jokeBadge = document.getElementById('joke-badge');
+    const kittVoiceBox = document.getElementById('kitt-voice-box');
+    const jokeSetup = document.getElementById('joke-setup-text');
+    const jokePunchline = document.getElementById('joke-punchline-text');
+    const slapFlash = document.getElementById('slap-flash');
+
+    let currentPattyJokeIdx = 0;
+    let currentRiderJokeIdx = 0;
+    let unlockedPattyJokes = new Set([0]);
+    let unlockedRiderJokes = new Set([0]);
+
+    function triggerKneeSlap(x, y) {
+      audio.playKneeSlap();
+      gamepads.rumble(150, 0.9, 0.4);
+      kneeSlapsCount++;
+      document.getElementById('stat-slaps').textContent = kneeSlapsCount;
+
+      slapFlash.classList.add('active');
+      setTimeout(() => slapFlash.classList.remove('active'), 120);
+
+      avatar.expression = 'slapped';
+      avatar.squashX = 1.35;
+      avatar.squashY = 0.65;
+      avatar.vy = -12;
+      avatar.lastSlapTime = Date.now();
+
+      const isRider = (heroMode === 'knee_rider');
+      const burstColors = isRider
+        ? ['#ef4444', '#f43f5e', '#06b6d4', '#ec4899', '#ffffff']
+        : ['#10b981', '#34d399', '#facc15', '#f43f5e', '#38bdf8'];
+
+      for (let i = 0; i < 36; i++) {
+        confetti.push({
+          x: x || avatar.x,
+          y: y || avatar.y,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.8) * 16,
+          color: burstColors[Math.floor(Math.random() * burstColors.length)],
+          size: Math.random() * 8 + 4,
+          rotation: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.2,
+          life: 1.0
+        });
+      }
+
+      let joke;
+      if (isRider) {
+        currentRiderJokeIdx = (currentRiderJokeIdx + 1) % KNEE_RIDER_JOKES.length;
+        unlockedRiderJokes.add(currentRiderJokeIdx);
+        joke = KNEE_RIDER_JOKES[currentRiderJokeIdx];
+
+        jokeBanner.classList.add('rider');
+        jokeBadge.classList.add('rider');
+        jokeBadge.textContent = "⚡ K.N.E.E. 2000 DIRECTIVE";
+        kittVoiceBox.classList.add('active');
+        jokePunchline.classList.add('rider');
+      } else {
+        currentPattyJokeIdx = (currentPattyJokeIdx + 1) % PATTY_JOKES.length;
+        unlockedPattyJokes.add(currentPattyJokeIdx);
+        joke = PATTY_JOKES[currentPattyJokeIdx];
+
+        jokeBanner.classList.remove('rider');
+        jokeBadge.classList.remove('rider');
+        jokeBadge.textContent = "⚡ KNEE SLAPPER UNLOCKED!";
+        kittVoiceBox.classList.remove('active');
+        jokePunchline.classList.remove('rider');
+      }
+
+      jokeSetup.textContent = joke.setup;
+      jokePunchline.textContent = joke.punchline;
+      jokeBanner.classList.add('show');
+
+      clearTimeout(window.jokeTimer);
+      window.jokeTimer = setTimeout(() => {
+        jokeBanner.classList.remove('show');
+      }, 9500);
+    }
+
+    document.getElementById('joke-close-btn').addEventListener('click', () => jokeBanner.classList.remove('show'));
+    document.getElementById('joke-next-btn').addEventListener('click', () => triggerKneeSlap(avatar.x, avatar.y));
+    document.getElementById('joke-share-btn').addEventListener('click', () => {
+      const isRider = (heroMode === 'knee_rider');
+      const joke = isRider ? KNEE_RIDER_JOKES[currentRiderJokeIdx] : PATTY_JOKES[currentPattyJokeIdx];
+      const speaker = isRider ? 'K.N.E.E. 2000' : 'Patty the Green Happy Knee';
+      const text = `🦵 Knee-Slapper from ${speaker}:\\n${joke.setup}\\n👉 ${joke.punchline}\\n(PocketGull Shift Sanctuary)`;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('joke-share-btn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy Joke', 2000);
+      });
+    });
+
+    /* =========================================================================
+       8. QUEST SYSTEM CONTROLLER & WAITING ROOM CONSULTATION CARD
+       ========================================================================= */
+    const questsModal = document.getElementById('quests-modal');
+    const questBriefModal = document.getElementById('quest-brief-modal');
+    const questHudPill = document.getElementById('quest-hud-pill');
+    const questHudLabel = document.getElementById('quest-hud-label');
+    const questsBtnText = document.getElementById('quests-btn-text');
+
+    let selectedQuestForBriefing = null;
+
+    function renderQuestsList(filter = 'all') {
+      const container = document.getElementById('quests-list-container');
+      const filtered = QUEST_LEVELS.filter(q => filter === 'all' || q.tier === filter);
+
+      container.innerHTML = filtered.map(q => `
+        <div class="quest-card tier-border-${q.tier}" onclick="openQuestBriefing(${q.id})">
+          <div class="quest-card-header">
+            <span class="quest-num">${q.title}</span>
+            <span class="tier-badge tier-${q.tier}">${q.tierLabel}</span>
+          </div>
+          <div class="quest-metaphor">${q.metaphor}</div>
+          <div class="quest-desc">${q.anatomyExplain}</div>
+          <div class="quest-footer">
+            <span>🎯 Mission: Collect ${q.targetCount} ${q.objectiveName}</span>
+            <span style="color: #38bdf8; font-weight: 700;">Tap for Patient Guide &rarr;</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.openQuestBriefing = function(questId) {
+      const q = QUEST_LEVELS.find(item => item.id === questId);
+      if (!q) return;
+      selectedQuestForBriefing = q;
+
+      const tierPill = document.getElementById('brief-tier-pill');
+      tierPill.className = `tier-badge tier-${q.tier}`;
+      tierPill.textContent = q.tierLabel;
+
+      document.getElementById('brief-modal-title').textContent = q.title;
+      document.getElementById('brief-metaphor').textContent = `"${q.metaphor}"`;
+      document.getElementById('brief-anatomy-explain').textContent = q.anatomyExplain;
+      document.getElementById('brief-healing-explain').textContent = q.healingExplain;
+
+      const diagramViewMap = {
+        1: { view: "Lateral Knee View (Diagram 2)", landmark: "Suprapatellar Capsule & Quadriceps Tendon" },
+        2: { view: "Anterior Kneecap View (Diagram 1)", landmark: "Medial Femoral Condyle → Proximal Tibia" },
+        3: { view: "Anterior Kneecap View (Diagram 1)", landmark: "Sesamoid Patella in Femoral Trochlear Groove" },
+        4: { view: "Anterior + Lateral Views (Diagrams 1 & 2)", landmark: "Inferior Patellar Pole → Tibial Tuberosity" },
+        5: { view: "Anterior + Lateral Views (Diagrams 1 & 2)", landmark: "Medial Tibial Plateau Fibrocartilage Wedge" },
+        6: { view: "Anterior + Lateral Views (Diagrams 1 & 2)", landmark: "Lateral Tibial Plateau & Fibular Head Margin" },
+        7: { view: "Lateral Knee View (Diagram 2)", landmark: "Lateral Femoral Condyle & Posterior Tibia" },
+        8: { view: "Lateral Knee View (Diagram 2)", landmark: "Posterior Intercondylar Notch & Tibial Shelf" },
+        9: { view: "Lateral Knee View (Diagram 2)", landmark: "Intercondylar Notch → Anterior Tibial Spine" },
+        10: { view: "Anterior + Lateral Views (Diagrams 1 & 2)", landmark: "Lateral Epicondyle → Lateral Fibular Head" },
+        11: { view: "Anterior Kneecap View (Diagram 1)", landmark: "VMO / Rectus Femoris / VL → Superior Patella" },
+        12: { view: "Dual Orthogonal Views (Diagrams 1 & 2)", landmark: "Femoral Condyles, Patella & Tibial Plateau" }
+      };
+      const diagMeta = diagramViewMap[q.id] || { view: "Dual Views", landmark: q.structure };
+      const elDiagView = document.getElementById('brief-diagram-view');
+      const elDiagLand = document.getElementById('brief-diagram-landmark');
+      if (elDiagView) elDiagView.textContent = diagMeta.view;
+      if (elDiagLand) elDiagLand.textContent = `Bony Anchor: ${diagMeta.landmark} (${q.structure})`;
+
+      const questionsList = document.getElementById('brief-doctor-questions');
+      questionsList.innerHTML = q.doctorQuestions.map(ques => `<li style="margin-bottom: 6px;">${ques}</li>`).join('');
+
+      questsModal.classList.remove('open');
+      questBriefModal.classList.add('open');
+    };
+
+    document.getElementById('btn-quests').addEventListener('click', () => {
+      renderQuestsList('all');
+      questsModal.classList.add('open');
+    });
+    document.getElementById('quests-close-btn').addEventListener('click', () => questsModal.classList.remove('open'));
+    document.getElementById('brief-close-btn').addEventListener('click', () => questBriefModal.classList.remove('open'));
+
+    // Filter Tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderQuestsList(tab.dataset.filter);
+      });
+    });
+
+    // Copy Doctor Questions to Clipboard
+    document.getElementById('btn-copy-doc-questions').addEventListener('click', () => {
+      if (!selectedQuestForBriefing) return;
+      const q = selectedQuestForBriefing;
+      const text = `🏥 PocketGull Knee Patient Guide: ${q.title}\\n"${q.metaphor}"\\n\\n🩺 3 Questions for My Doctor:\\n1. ${q.doctorQuestions[0]}\\n2. ${q.doctorQuestions[1]}\\n3. ${q.doctorQuestions[2]}\\n\\n(Generated in Waiting Room)`;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btn-copy-doc-questions');
+        btn.textContent = '✅ Copied to Phone!';
+        setTimeout(() => btn.textContent = '📋 Copy Questions to Phone', 2500);
+      });
+    });
+
+    // Launch Quest Gameplay
+    document.getElementById('btn-launch-quest').addEventListener('click', () => {
+      if (!selectedQuestForBriefing) return;
+      activeQuest = selectedQuestForBriefing;
+      questCollected = 0;
+
+      // Adjust terrain parameters to reflect the condition!
+      hills[2].amplitude = activeQuest.terrainAmp;
+      hills[2].wavelength = activeQuest.terrainWave;
+
+      questHudLabel.textContent = `${activeQuest.title}: 0/${activeQuest.targetCount}`;
+      questHudPill.style.display = 'inline-flex';
+      questsBtnText.textContent = `🎯 Level ${activeQuest.id}`;
+
+      spawnCollectibles();
+      questBriefModal.classList.remove('open');
+
+      // Switch to interactive play
+      if (isCinemaMode) {
+        document.getElementById('btn-mode').click();
+      }
+    });
+
+    function checkQuestCompletion() {
+      if (!activeQuest) return;
+      questCollected++;
+      questHudLabel.textContent = `${activeQuest.title}: ${questCollected}/${activeQuest.targetCount}`;
+      gamepads.rumble(80, 0.4, 0.4);
+
+      if (questCollected >= activeQuest.targetCount) {
+        audio.playQuestVictory();
+        gamepads.rumble(400, 0.8, 0.9);
+
+        // Burst celebration confetti
+        for (let i = 0; i < 60; i++) {
+          confetti.push({
+            x: avatar.x,
+            y: avatar.y,
+            vx: (Math.random() - 0.5) * 20,
+            vy: (Math.random() - 0.8) * 20,
+            color: ['#10b981', '#34d399', '#facc15', '#38bdf8', '#ef4444'][Math.floor(Math.random() * 5)],
+            size: Math.random() * 9 + 4,
+            rotation: Math.random() * Math.PI * 2,
+            vRot: (Math.random() - 0.5) * 0.2,
+            life: 1.2
+          });
+        }
+
+        // Flow-Preserving Victory Banner (No Hard-Stop Modal Context Switch!)
+        pendingCompletedQuest = activeQuest;
+        const banner = document.getElementById('quest-complete-flow-banner');
+        const bannerTitle = document.getElementById('flow-banner-title');
+        if (banner && bannerTitle) {
+          bannerTitle.textContent = `${activeQuest.title} Fully Restored!`;
+          banner.style.display = 'flex';
+          banner.style.opacity = '1';
+          setTimeout(() => { if (banner) banner.style.display = 'none'; }, 5500);
+        }
+        audio.playChime(880);
+        hills[2].amplitude = 60;
+        hills[2].wavelength = 700;
+        activeQuest = null;
+        questHudPill.style.display = 'none';
+        questsBtnText.textContent = '12 Knee Quests';
+        spawnCollectibles();
+      }
+    }
+
+    /* =========================================================================
+       9. HERO MODE SWITCHER: GREEN HAPPY KNEE ⟷ KNEE RIDER
+       ========================================================================= */
+    const btnHero = document.getElementById('btn-hero');
+    const heroIcon = document.getElementById('hero-icon');
+    const heroText = document.getElementById('hero-text');
+    const brandPill = document.getElementById('brand-pill');
+    const brandIcon = document.getElementById('brand-icon');
+    const brandTitle = document.getElementById('brand-title');
+    const hintText = document.getElementById('hint-text');
+    const btnTurbo = document.getElementById('btn-turbo');
+    const statSpecialLabel = document.getElementById('stat-special-label');
+    const statSpecialVal = document.getElementById('stat-special-val');
+    const statDist = document.getElementById('stat-dist');
+    const statSlaps = document.getElementById('stat-slaps');
+
+    function switchHeroMode(mode) {
+      heroMode = mode;
+      const isRider = (heroMode === 'knee_rider');
+      document.body.classList.toggle('synthwave-mode', isRider);
+
+      if (isRider) {
+        heroIcon.textContent = '🌱';
+        heroText.textContent = 'Happy Knee';
+        btnHero.classList.add('rider-active');
+
+        brandPill.classList.add('rider');
+        brandIcon.textContent = '🏎️';
+        brandTitle.textContent = 'KNEE RIDER 2000';
+
+        statSpecialLabel.textContent = 'Turbo Boost:';
+        statSpecialVal.textContent = `${Math.round(turboCharge)}%`;
+        statSpecialVal.classList.add('rider');
+        statDist.classList.add('rider');
+        statSlaps.classList.add('rider');
+
+        hintText.innerHTML = `Hold <span class="hint-key">SPACE</span> / <span class="hint-key">A</span> to dive &bull; <span class="hint-key">SHIFT</span> / <span class="hint-key">T</span> / <span class="hint-key">RT</span> for <b>TURBO BOOST</b>! Click K.N.E.E. for 80s tactical jokes!`;
+        btnTurbo.style.display = 'inline-flex';
+
+        audio.setRiderMode(true);
+        audio.playScannerWhoosh();
+      } else {
+        heroIcon.textContent = '🏎️';
+        heroText.textContent = 'KNEE RIDER';
+        btnHero.classList.remove('rider-active');
+
+        brandPill.classList.remove('rider');
+        brandIcon.textContent = '🌱';
+        brandTitle.textContent = "Patty's Knee Slapper";
+
+        statSpecialLabel.textContent = 'Harmony:';
+        statSpecialVal.textContent = `${harmonyMeter}%`;
+        statSpecialVal.classList.remove('rider');
+        statDist.classList.remove('rider');
+        statSlaps.classList.remove('rider');
+
+        hintText.innerHTML = `Hold <span class="hint-key">SPACE</span> / <span class="hint-key">CLICK</span> / Gamepad <span class="hint-key">A</span> to dive &bull; Release to launch! Click Patty for a <b>Knee Slapper</b>!`;
+        btnTurbo.style.display = 'none';
+
+        audio.setRiderMode(false);
+      }
+    }
+
+    btnHero.addEventListener('click', () => {
+      switchHeroMode(heroMode === 'patty' ? 'knee_rider' : 'patty');
+    });
+
+    function triggerTurboBoost() {
+      if (turboCharge < 25) return;
+      isTurbo = true;
+      audio.playTurboBoostSound();
+      gamepads.rumble(250, 0.5, 0.8);
+      avatar.vx = 4.5;
+      avatar.vy = -120 * pacingMultiplier;
+      turboCharge = Math.max(0, turboCharge - 35);
+      if (heroMode === 'knee_rider') {
+        statSpecialVal.textContent = `${Math.round(turboCharge)}%`;
+      }
+      setTimeout(() => { isTurbo = false; }, 950);
+    }
+
+    btnTurbo.addEventListener('click', triggerTurboBoost);
+
+    /* =========================================================================
+       10. INPUT HANDLING & GAMEPAD POLLING
+       ========================================================================= */
+    canvas.addEventListener('pointerdown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      const distToAvatar = Math.hypot(clickX - avatar.x, clickY - avatar.y);
+      if (distToAvatar < avatar.radius * 2.2) {
+        triggerKneeSlap(avatar.x, avatar.y);
+      } else {
+        isDiving = true;
+      }
+    });
+
+    window.addEventListener('pointerup', () => { isDiving = false; });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowDown') isDiving = true;
+      if (e.code === 'KeyK') triggerKneeSlap(avatar.x, avatar.y);
+      if (e.code === 'KeyT' || e.code === 'ShiftLeft' || e.code === 'ShiftRight') triggerTurboBoost();
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowDown') isDiving = false;
+    });
+
+    document.getElementById('btn-mobile-slap').addEventListener('click', () => {
+      triggerKneeSlap(avatar.x, avatar.y);
+    });
+
+    /* =========================================================================
+       11. SHIFT ROSTER & JOKE BOOK MODALS
+       ========================================================================= */
+    const DEFAULT_ROSTER = [
+      { rank: 1, name: "Dr. Alex M.", role: "🩻 Radiology", distance: 4820, slaps: 16, note: "PACS room 3 is serene tonight, fresh roast coffee in breakroom!" },
+      { rank: 2, name: "K.N.E.E. Unit 01", role: "🏎️ Knee Rider Unit", distance: 4450, slaps: 19, note: "All joint borders secured. Turbo Boost operational." },
+      { rank: 3, name: "Nurse Elena", role: "🩺 Nursing", distance: 3640, slaps: 11, note: "Triage clear! Sending warmth to the oncoming morning crew 🌿" },
+      { rank: 4, name: "Tech Marcus", role: "✨ Radiologist Fellow", distance: 3150, slaps: 9, note: "Patty caught the triple condyle jump on the hill crest!" },
+      { rank: 5, name: "Jordan R.", role: "☕ Night Shift", distance: 2480, slaps: 7, note: "Survivor of the 3 AM CT queue. We survived!" }
+    ];
+
+    function getShiftRoster() {
+      try {
+        const stored = localStorage.getItem('pocketgull_shift_roster');
+        return stored ? JSON.parse(stored) : DEFAULT_ROSTER;
+      } catch (e) {
+        return DEFAULT_ROSTER;
+      }
+    }
+
+    function saveShiftRoster(roster) {
+      try {
+        localStorage.setItem('pocketgull_shift_roster', JSON.stringify(roster));
+      } catch (e) {}
+    }
+
+    function renderShiftRoster() {
+      const listEl = document.getElementById('roster-list');
+      const roster = getShiftRoster();
+      roster.sort((a, b) => b.distance - a.distance);
+
+      listEl.innerHTML = roster.map((item, idx) => `
+        <div class="roster-item">
+          <div class="roster-left">
+            <div class="roster-rank">#${idx + 1}</div>
+            <div>
+              <div class="roster-name">${item.name}</div>
+              <div class="roster-role">${item.role}</div>
+              ${item.note ? `<div class="roster-note">"${item.note}"</div>` : ''}
+            </div>
+          </div>
+          <div class="roster-stat">
+            <div class="roster-distance">${item.distance.toLocaleString()} m</div>
+            <div class="roster-slaps">${item.slaps} knee-slaps</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const rosterModal = document.getElementById('roster-modal');
+    document.getElementById('btn-roster').addEventListener('click', () => {
+      renderShiftRoster();
+      rosterModal.classList.add('open');
+    });
+    document.getElementById('roster-close-btn').addEventListener('click', () => rosterModal.classList.remove('open'));
+
+    document.getElementById('btn-save-roster').addEventListener('click', () => {
+      const name = document.getElementById('input-roster-name').value.trim() || 'Anonymous Colleague';
+      const role = document.getElementById('select-roster-role').value;
+      const note = document.getElementById('input-roster-note').value.trim();
+
+      const roster = getShiftRoster();
+      roster.push({
+        rank: roster.length + 1,
+        name,
+        role,
+        distance: Math.max(distanceMeters, 120),
+        slaps: kneeSlapsCount,
+        note
+      });
+      saveShiftRoster(roster);
+      renderShiftRoster();
+      document.getElementById('input-roster-name').value = '';
+      document.getElementById('input-roster-note').value = '';
+    });
+
+    const jokesModal = document.getElementById('jokes-modal');
+    document.getElementById('btn-jokes').addEventListener('click', () => {
+      const listEl = document.getElementById('jokes-book-list');
+      const isRider = (heroMode === 'knee_rider');
+      const jokes = isRider ? KNEE_RIDER_JOKES : PATTY_JOKES;
+      const unlocked = isRider ? unlockedRiderJokes : unlockedPattyJokes;
+
+      document.getElementById('jokes-modal-title').textContent = isRider
+        ? "K.N.E.E. 2000 Tactical Joke Database"
+        : "Patty's Knee-Slapper Joke Book";
+
+      listEl.innerHTML = jokes.map((j, idx) => `
+        <div class="roster-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <span class="joke-badge ${isRider ? 'rider' : ''}">${j.category} #${idx + 1}</span>
+            <span style="font-size: 11px; color: ${unlocked.has(idx) ? '#34d399' : '#64748b'};">
+              ${unlocked.has(idx) ? '✅ Unlocked' : '🔒 Slap to Unlock'}
+            </span>
+          </div>
+          <div style="font-size: 14px; font-weight: 600; color: #f1f5f9;">${j.setup}</div>
+          <div style="font-size: 14px; font-weight: 700; color: ${isRider ? '#f87171' : '#34d399'};">👉 ${j.punchline}</div>
+        </div>
+      `).join('');
+      jokesModal.classList.add('open');
+    });
+    document.getElementById('jokes-close-btn').addEventListener('click', () => jokesModal.classList.remove('open'));
+
+    [rosterModal, jokesModal, questsModal, questBriefModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('open');
+      });
+    });
+
+    const btnSound = document.getElementById('btn-sound');
+    btnSound.addEventListener('click', () => {
+      audio.enabled = !audio.enabled;
+      btnSound.classList.toggle('active', audio.enabled);
+      document.getElementById('sound-icon').textContent = audio.enabled ? '🔔' : '🔕';
+      document.getElementById('sound-text').textContent = audio.enabled ? 'Sound: On' : 'Muted';
+      if (!audio.enabled) {
+        audio.stopSynthwaveBass();
+      } else if (heroMode === 'knee_rider') {
+        audio.startSynthwaveBass();
+      }
+    });
+
+    const btnChrono = document.getElementById('btn-chrono');
+    btnChrono.addEventListener('click', () => {
+      currentChronoIndex = (currentChronoIndex + 1) % CIRCADIAN_MODES.length;
+      const mode = CIRCADIAN_MODES[currentChronoIndex];
+      document.getElementById('chrono-icon').textContent = mode.icon;
+      document.getElementById('chrono-text').textContent = mode.name;
+    });
+
+    const btnMode = document.getElementById('btn-mode');
+    btnMode.addEventListener('click', () => {
+      isCinemaMode = !isCinemaMode;
+      btnMode.classList.toggle('active', isCinemaMode);
+      document.getElementById('mode-icon').textContent = isCinemaMode ? '🎬' : '🕹️';
+      document.getElementById('mode-text').textContent = isCinemaMode ? 'Auto-Cinema' : 'Shift Play';
+    });
+    btnMode.classList.add('active');
+
+    const btnPacing = document.getElementById('btn-pacing');
+    btnPacing.addEventListener('click', () => {
+      currentPacingIdx = (currentPacingIdx + 1) % PACING_MODES.length;
+      const mode = PACING_MODES[currentPacingIdx];
+      pacingMultiplier = mode.mult;
+      document.getElementById('pacing-icon').textContent = mode.icon;
+      document.getElementById('pacing-text').textContent = mode.name;
+    });
+
+    /* =========================================================================
+       12. MAIN 60/120 FPS RENDERING & KINEMATICS LOOP
+       ========================================================================= */
+    let lastTime = performance.now();
+
+    function renderLoop(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      // Poll Gamepad Controller
+      gamepads.poll(
+        (diveState) => { if (!isCinemaMode) isDiving = diveState; },
+        () => { triggerKneeSlap(avatar.x, avatar.y); },
+        () => { triggerTurboBoost(); }
+      );
+
+      const isRider = (heroMode === 'knee_rider');
+      const pal = isRider ? SYNTHWAVE_PALETTE : CIRCADIAN_MODES[currentChronoIndex];
+
+      // A. Sky Gradient
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
+      skyGrad.addColorStop(0, pal.skyTop);
+      skyGrad.addColorStop(1, pal.skyBottom);
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // B. Celestial Sun / Synthwave Horizon
+      if (isRider) {
+        ctx.save();
+        const sunX = width * 0.72;
+        const sunY = height * 0.32;
+        const sunR = 64;
+
+        const sunGlow = ctx.createRadialGradient(sunX, sunY, sunR * 0.3, sunX, sunY, sunR * 2.2);
+        sunGlow.addColorStop(0, '#f43f5e');
+        sunGlow.addColorStop(0.5, '#ec4899');
+        sunGlow.addColorStop(1, 'transparent');
+        ctx.fillStyle = sunGlow;
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, sunR * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        const sunDisc = ctx.createLinearGradient(sunX, sunY - sunR, sunX, sunY + sunR);
+        sunDisc.addColorStop(0, '#fde047');
+        sunDisc.addColorStop(0.6, '#f43f5e');
+        sunDisc.addColorStop(1, '#7e22ce');
+        ctx.fillStyle = sunDisc;
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, sunR, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = pal.skyBottom;
+        for (let i = 0; i < 7; i++) {
+          const cutY = sunY - 10 + i * 11;
+          const cutH = 2 + i * 1.2;
+          ctx.fillRect(sunX - sunR, cutY, sunR * 2, cutH);
+        }
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.fillStyle = pal.sunColor;
+        ctx.shadowColor = pal.sunColor;
+        ctx.shadowBlur = 40;
+        ctx.beginPath();
+        ctx.arc(width * 0.78, height * 0.22, 44, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // C. Terrain Measurement & Auto-Cinema
+      const groundY = getForegroundHillY(avatar.x);
+      const slope = getForegroundSlope(avatar.x);
+      const dtClamped = Math.min(dt, 0.033);
+
+      if (isCinemaMode) {
+        if (slope > 0.06) {
+          isDiving = true;
+        } else if (slope < -0.04 || avatar.y < groundY - 140) {
+          isDiving = false;
+        }
+        if (Date.now() - avatar.lastSlapTime > 35000) {
+          triggerKneeSlap(avatar.x, avatar.y);
+        }
+      }
+
+      // D. Physics (Paced, Serene, Floaty Kinematics)
+      if (isFlowActive) {
+        flowTimer -= dtClamped;
+        if (flowTimer <= 0) {
+          isFlowActive = false;
+          flowCombo = 0;
+        }
+      }
+      if (slapCooldownTimer > 0) {
+        slapCooldownTimer -= dtClamped;
+      }
+      if (isShockwaveActive) {
+        shockwaveRadius += 900 * dtClamped;
+        if (shockwaveRadius > width * 1.5) {
+          isShockwaveActive = false;
+          shockwaveRadius = 0;
+        }
+      }
+      const forwardSpeed = avatar.vx * pacingMultiplier;
+      distanceMeters += Math.round(forwardSpeed * 0.4);
+      statDist.textContent = `${distanceMeters.toLocaleString()} m`;
+
+      const gravity = (isDiving ? 420 : 190) * pacingMultiplier;
+      avatar.vy += gravity * dtClamped;
+
+      if (avatar.y < 110) {
+        avatar.vy += 450 * dtClamped;
+      }
+
+      avatar.y += avatar.vy * dtClamped;
+
+      if (avatar.y + avatar.radius >= groundY) {
+        avatar.y = groundY - avatar.radius;
+
+        if (slope > 0.05) {
+          // Perfect Downslope Landing!
+          if (isDiving && lastLandType !== 'downslope') {
+            flowCombo++;
+            lastLandType = 'downslope';
+            if (flowCombo >= 3) {
+              isFlowActive = true;
+              flowTimer = 6.0; // 6s duration
+              audio.playLaunch(440);
+              gamepads.rumble(90, 0.4, 0.2);
+            }
+          }
+          const boostRate = (isDiving || isFlowActive) ? 4.6 : 1.6;
+          const maxVx = isTurbo ? 4.8 : (isFlowActive ? 3.0 : (isDiving ? 2.6 : 2.0));
+          avatar.vx = Math.min(avatar.vx + slope * boostRate * dtClamped, maxVx);
+          avatar.expression = isDiving ? 'diving' : 'happy';
+        } else {
+          // Landed on upslope or flat - combo breaks
+          if (slope < -0.06 && lastLandType !== 'upslope') {
+            flowCombo = 0;
+            isFlowActive = false;
+            lastLandType = 'upslope';
+          }
+
+          if (avatar.vx > 1.35 && slope < -0.08) {
+            avatar.vy = Math.max(slope * avatar.vx * 130 * (isRider ? 1.2 : 1.05), -290 * pacingMultiplier);
+            audio.playLaunch(280 + Math.abs(slope) * 120);
+            gamepads.rumble(60, 0.25, 0.15);
+            avatar.expression = 'soaring';
+            avatar.squashX = 0.85;
+            avatar.squashY = 1.18;
+
+            turboCharge = Math.min(100, turboCharge + 8);
+            if (isRider) statSpecialVal.textContent = `${Math.round(turboCharge)}%`;
+          }
+          avatar.vx = Math.max(avatar.vx - 1.2 * dtClamped, 1.3);
+        }
+        avatar.angle = Math.atan2(slope, 1);
+      } else {
+        avatar.angle = Math.atan2(avatar.vy * 0.04, avatar.vx * 0.12);
+        if (avatar.vy < -50) {
+          avatar.expression = 'soaring';
+        } else if (isDiving) {
+          avatar.expression = 'diving';
+        }
+      }
+
+      avatar.squashX += (1 - avatar.squashX) * 0.10;
+      avatar.squashY += (1 - avatar.squashY) * 0.10;
+
+      hills.forEach(h => {
+        h.offset += forwardSpeed * h.speed;
+      });
+
+      // E. Draw Parallax Condylar Hills
+      const hillColors = [pal.hill1, pal.hill2, pal.hill3];
+      hills.forEach((h, lIdx) => {
+        ctx.save();
+        ctx.fillStyle = hillColors[lIdx];
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+
+        const step = 14;
+        for (let x = 0; x <= width + step; x += step) {
+          const worldX = x;
+          const normalizedX = (worldX + h.offset);
+          const yBase = height * h.baseY;
+          const y = yBase +
+                    Math.sin(normalizedX / (h.wavelength / (Math.PI * 2))) * (h.amplitude * 0.75) +
+                    Math.cos(normalizedX / (h.wavelength * 0.45)) * (h.amplitude * 0.25);
+          ctx.lineTo(x, y);
+        }
+
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fill();
+
+        if (isRider && lIdx === 2) {
+          ctx.strokeStyle = '#06b6d4';
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = '#06b6d4';
+          ctx.shadowBlur = 12;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
+          const gridSpacing = 48;
+          const gridOffset = (h.offset % gridSpacing);
+          for (let gx = -gridOffset; gx <= width + gridSpacing; gx += gridSpacing) {
+            const gy = getForegroundHillY(gx);
+            ctx.moveTo(gx, gy);
+            ctx.lineTo(gx - 30, height);
+          }
+          ctx.stroke();
+        }
+        ctx.restore();
+      });
+
+      // F. Draw Collectibles & Quest Items
+      collectibles.forEach((c) => {
+        const screenX = c.x - hills[2].offset;
+
+        if (screenX < -100) {
+          c.x += width + 500 + Math.random() * 300;
+          const groundBase = getForegroundHillY(c.x);
+          const arcHeight = 60 + Math.sin((c.pulse || 0)) * 120;
+          c.y = groundBase - arcHeight;
+          c.collected = false;
+        }
+
+        if (screenX >= -50 && screenX <= width + 50 && !c.collected) {
+          c.pulse += 0.05;
+          const glow = Math.sin(c.pulse) * 4;
+
+          // Magnetic Pull during Flow State (Radius 220px)
+          if (isFlowActive && !c.collected) {
+            const mDist = Math.hypot(screenX - avatar.x, c.y - avatar.y);
+            if (mDist < 220) {
+              const pullStrength = (1.0 - mDist / 220) * 12;
+              c.x -= ((screenX - avatar.x) / mDist) * pullStrength;
+              c.y -= ((c.y - avatar.y) / mDist) * pullStrength;
+            }
+          }
+
+          // Knee Slap Shockwave Instant Collection
+          if (isShockwaveActive && !c.collected) {
+            const swDist = Math.hypot(screenX - avatar.x, c.y - avatar.y);
+            if (swDist <= shockwaveRadius) {
+              c.collected = true;
+              audio.playChime(784);
+              if (activeQuest) checkQuestCompletion();
+            }
+          }
+
+          const dist = Math.hypot(screenX - avatar.x, c.y - avatar.y);
+          if (dist < avatar.radius + c.radius) {
+            c.collected = true;
+            audio.playChime(c.type === 'synovial' ? 587 : 784);
+
+            if (activeQuest) {
+              checkQuestCompletion();
+            } else if (isRider) {
+              turboCharge = Math.min(100, turboCharge + 10);
+              statSpecialVal.textContent = `${Math.round(turboCharge)}%`;
+            } else {
+              harmonyMeter = Math.min(harmonyMeter + 5, 100);
+              statSpecialVal.textContent = `${harmonyMeter}%`;
+            }
+
+            for (let i = 0; i < 8; i++) {
+              particles.push({
+                x: screenX,
+                y: c.y,
+                vx: (Math.random() - 0.5) * 6,
+                vy: (Math.random() - 0.5) * 6,
+                life: 1.0,
+                color: activeQuest ? activeQuest.itemColor : (isRider ? '#f43f5e' : (c.type === 'synovial' ? '#facc15' : '#38bdf8'))
+              });
+            }
+          }
+
+          ctx.save();
+          ctx.beginPath();
+          const itemColor = activeQuest ? activeQuest.itemColor : (isRider ? '#f43f5e' : (c.type === 'synovial' ? '#facc15' : '#38bdf8'));
+
+          if (isRider || activeQuest?.tier === 'red') {
+            ctx.fillStyle = itemColor;
+            ctx.shadowColor = itemColor;
+            ctx.shadowBlur = 18;
+            ctx.moveTo(screenX, c.y - c.radius - glow);
+            ctx.lineTo(screenX + c.radius + glow, c.y);
+            ctx.lineTo(screenX, c.y + c.radius + glow);
+            ctx.lineTo(screenX - c.radius - glow, c.y);
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            ctx.arc(screenX, c.y, c.radius + glow, 0, Math.PI * 2);
+            ctx.fillStyle = itemColor;
+            ctx.shadowColor = ctx.fillStyle;
+            ctx.shadowBlur = 16;
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(screenX - 3, c.y - 3, c.radius * 0.4, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+
+      // G. Particles & Confetti
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= dt * 1.5;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      for (let i = confetti.length - 1; i >= 0; i--) {
+        const cf = confetti[i];
+        cf.x += cf.vx;
+        cf.y += cf.vy;
+        cf.vy += 12 * dt;
+        cf.rotation += cf.vRot;
+        cf.life -= dt * 0.6;
+        if (cf.life <= 0) {
+          confetti.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.globalAlpha = cf.life;
+        ctx.translate(cf.x, cf.y);
+        ctx.rotate(cf.rotation);
+        ctx.fillStyle = cf.color;
+        ctx.fillRect(-cf.size / 2, -cf.size / 2, cf.size, cf.size * 0.6);
+        ctx.restore();
+      }
+
+      // H. Draw Avatar
+      ctx.save();
+      ctx.translate(avatar.x, avatar.y);
+      ctx.rotate(avatar.angle);
+      ctx.scale(avatar.squashX, avatar.squashY);
+
+      if (isRider) {
+        // KNEE RIDER 2000
+        ctx.save();
+        const jetWave = Math.sin(now * 0.05) * 4;
+        const thrusterLen = isTurbo ? 64 : 26;
+        const thrusterGrad = ctx.createLinearGradient(-avatar.radius, 0, -avatar.radius - thrusterLen, 0);
+        thrusterGrad.addColorStop(0, '#ef4444');
+        thrusterGrad.addColorStop(0.5, '#f43f5e');
+        thrusterGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = thrusterGrad;
+
+        ctx.beginPath();
+        ctx.moveTo(-avatar.radius * 0.7, -8);
+        ctx.lineTo(-avatar.radius - thrusterLen, -8 + jetWave);
+        ctx.lineTo(-avatar.radius * 0.7, -4);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(-avatar.radius * 0.7, 4);
+        ctx.lineTo(-avatar.radius - thrusterLen, 4 - jetWave);
+        ctx.lineTo(-avatar.radius * 0.7, 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        const chassisGrad = ctx.createLinearGradient(-avatar.radius, -avatar.radius, avatar.radius, avatar.radius);
+        chassisGrad.addColorStop(0, '#27272a');
+        chassisGrad.addColorStop(0.3, '#09090b');
+        chassisGrad.addColorStop(0.8, '#18181b');
+        chassisGrad.addColorStop(1, '#09090b');
+
+        ctx.beginPath();
+        ctx.arc(0, 0, avatar.radius, 0, Math.PI * 2);
+        ctx.fillStyle = chassisGrad;
+        ctx.shadowColor = isTurbo ? '#ef4444' : 'rgba(0,0,0,0.8)';
+        ctx.shadowBlur = isTurbo ? 32 : 16;
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#ef4444';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(0, -6, avatar.radius * 0.75, Math.PI * 1.1, Math.PI * 1.9);
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.stroke();
+
+        // Oscillating Red Scanner
+        avatar.scannerPos += avatar.scannerDir * dt * 4.2;
+        if (avatar.scannerPos > 1) { avatar.scannerPos = 1; avatar.scannerDir = -1; }
+        else if (avatar.scannerPos < -1) { avatar.scannerPos = -1; avatar.scannerDir = 1; }
+
+        const scannerWidth = 26;
+        const scannerHeight = 6;
+        const scannerX = 2;
+        const scannerY = 0;
+
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(scannerX, scannerY - scannerHeight / 2, scannerWidth, scannerHeight);
+        ctx.strokeStyle = '#3f3f46';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(scannerX, scannerY - scannerHeight / 2, scannerWidth, scannerHeight);
+
+        const numLeds = 8;
+        const targetLed = Math.round(((avatar.scannerPos + 1) / 2) * (numLeds - 1));
+        const ledW = scannerWidth / numLeds;
+
+        for (let i = 0; i < numLeds; i++) {
+          const distToBeam = Math.abs(i - targetLed);
+          let intensity = Math.max(0, 1 - distToBeam * 0.45);
+          ctx.fillStyle = `rgba(239, 68, 68, ${0.15 + intensity * 0.85})`;
+          if (distToBeam === 0) { ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 12; }
+          else ctx.shadowBlur = 0;
+          ctx.fillRect(scannerX + i * ledW + 0.5, scannerY - scannerHeight / 2 + 0.5, ledW - 1, scannerHeight - 1);
+        }
+
+        ctx.font = 'bold 8px monospace';
+        ctx.fillStyle = '#f87171';
+        ctx.textAlign = 'center';
+        ctx.shadowBlur = 0;
+        ctx.fillText('K.N.E.E.', 0, -12);
+
+      } else {
+        // GREEN HAPPY KNEE (Patty)
+        ctx.save();
+        ctx.fillStyle = 'rgba(52, 211, 153, 0.45)';
+        ctx.beginPath();
+        ctx.moveTo(-avatar.radius * 0.8, -4);
+        const capeWave = Math.sin(now * 0.01) * 8;
+        ctx.quadraticCurveTo(-avatar.radius * 2.2, capeWave, -avatar.radius * 3.2, capeWave * 1.4);
+        ctx.lineTo(-avatar.radius * 3.2, capeWave * 1.4 + 10);
+        ctx.quadraticCurveTo(-avatar.radius * 2.0, capeWave + 6, -avatar.radius * 0.8, 6);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // Dual Meniscal Shock-Absorber Glider Skis & Lateral Fibular Fin (Reference Diagrams 1 & 2)
+        ctx.save();
+        ctx.strokeStyle = '#2dd4bf';
+        ctx.lineWidth = 3.5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-avatar.radius * 0.85, avatar.radius + 3);
+        ctx.quadraticCurveTo(0, avatar.radius + 7, avatar.radius * 0.95, avatar.radius + 1);
+        ctx.stroke();
+        // Tibial Tuberosity & Patellar Tendon Golden Anchor Strap
+        ctx.strokeStyle = 'rgba(253, 224, 71, 0.85)';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.arc(0, 0, avatar.radius + 2.5, -Math.PI * 0.32, Math.PI * 0.32);
+        ctx.stroke();
+        ctx.restore();
+
+        const bodyGrad = ctx.createRadialGradient(-6, -8, 4, 0, 0, avatar.radius);
+        bodyGrad.addColorStop(0, '#6ee7b7');
+        bodyGrad.addColorStop(0.4, '#10b981');
+        bodyGrad.addColorStop(1, '#047857');
+
+        ctx.beginPath();
+        ctx.arc(0, 0, avatar.radius, 0, Math.PI * 2);
+        ctx.fillStyle = bodyGrad;
+        ctx.shadowColor = 'rgba(16, 185, 129, 0.5)';
+        ctx.shadowBlur = 18;
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
+        if (avatar.blushing) {
+          ctx.fillStyle = 'rgba(251, 113, 133, 0.5)';
+          ctx.beginPath();
+          ctx.arc(-11, 5, 5, 0, Math.PI * 2);
+          ctx.arc(11, 5, 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.fillStyle = '#0f172a';
+        if (avatar.expression === 'soaring') {
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.arc(-8, -2, 5, Math.PI * 1.1, Math.PI * 1.9);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(8, -2, 5, Math.PI * 1.1, Math.PI * 1.9);
+          ctx.stroke();
+        } else if (avatar.expression === 'diving') {
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.moveTo(-12, -4); ctx.lineTo(-6, -1); ctx.lineTo(-12, 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(12, -4); ctx.lineTo(6, -1); ctx.lineTo(12, 2);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.arc(-8, -2, 3.5, 0, Math.PI * 2);
+          ctx.arc(8, -2, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(-9, -3.5, 1.2, 0, Math.PI * 2);
+          ctx.arc(7, -3.5, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#0f172a';
+        ctx.arc(0, 4, 6, 0.15, Math.PI - 0.15);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    requestAnimationFrame(renderLoop);
+
+    setTimeout(() => {
+      triggerKneeSlap(avatar.x, avatar.y);
+    }, 1800);
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "benchmark": "CASMI 2026 Mass Spectrometry & Natural Product Identification",
+  "lineageOfGratitude": [
+    "Hengck23 (DreaMS foundation model & safe-tail spectral matching)",
+    "Eveliaveldrine (Python 3.13 RDKit wheels for air-gapped kernels)",
+    "Enveda Biosciences & CASMI 2026 Organizers (Mass Spectrometry benchmark leadership)",
+    "ICEBERG & GLACIER Architects (Forward neural MS/MS fragmentation simulation)",
+    "LOTUS & COCONUT Curators (Open natural product structural taxonomy)",
+    "Countess Ada Lovelace & Hermann von Helmholtz (Poetic science & physiological optics)"
+  ],
+  "triParadigmLenses": {
+    "sixthGradeExplorer": "Think of our mass spectrometer like a gentle wind tunnel that weighs molecular Lego bricks and snaps them back together.",
+    "advancedBiochemist": "4D timsTOF collision cross-section (CCS) coordinates coupled with Retro-Diels-Alder (RDA) transition states and Wasserstein-1 spectral geodesics.",
+    "clinicalResearch": "Gut microbial beta-glucosidase aglycone biotransformation, CYP3A4 IC50 metabolic boundaries, and HL7 FHIR R4 Substance/Observation export."
+  },
+  "candidatePriors": [
+    {
+      "inchikeyBlock1": "REFJWTPEDVJJIY",
+      "name": "Quercetin (Aglycone Flavonol)",
+      "pubchemCid": 5280343,
+      "chemblId": "CHEMBL50",
+      "exactMassDa": 302.04265,
+      "ccsAngstrom2": 164.2,
+      "rdaCharacteristicFragmentsMz": [
+        153.018,
+        137.023,
+        178.998
+      ],
+      "dreamsSafeTailCosine": 0.964,
+      "cyp3a4Ic50Um": 4.8
+    },
+    {
+      "inchikeyBlock1": "IKGXIBQEEMLURG",
+      "name": "Rutin (Quercetin-3-O-rutinoside)",
+      "pubchemCid": 5280805,
+      "chemblId": "CHEMBL226335",
+      "exactMassDa": 610.15338,
+      "ccsAngstrom2": 231.8,
+      "rdaCharacteristicFragmentsMz": [
+        303.05,
+        465.103,
+        153.018
+      ],
+      "dreamsSafeTailCosine": 0.951,
+      "cyp3a4Ic50Um": 18.2
+    }
+  ]
+}

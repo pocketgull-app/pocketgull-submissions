@@ -1,0 +1,22 @@
+{
+  "id": "philgear/med-skeptic-clinical-ai-benchmark",
+  "title": "med-skeptic-clinical-ai-benchmark",
+  "code_file": "med_skeptic_proposal.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "medical",
+    "benchmark",
+    "nlp",
+    "computer-vision",
+    "research"
+  ],
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

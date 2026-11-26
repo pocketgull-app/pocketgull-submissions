@@ -1,0 +1,74 @@
+{
+  "benchmark": "med-skeptic",
+  "version": "1.2.0",
+  "eval_timestamp": "2026-11-07T05:07:17Z",
+  "tasks_evaluated": 5,
+  "sample_size_total": 4200,
+  "leaderboard": [
+    {
+      "name": "Pocket-Gull Skeptic CDS (Flax NNX + JAX)",
+      "falsification_acc": 88.4,
+      "false_acceptance_rate": 4.2,
+      "cochrane_rob_rho": 0.89,
+      "dicom_grounding_f1": 0.84,
+      "brier_score": 0.082,
+      "expected_calibration_error": 0.038,
+      "dca_net_utility_acc": 93.8,
+      "salutogenic_manageability_acc": 96.5,
+      "latency_ms": 0.72,
+      "sei": 90.4
+    },
+    {
+      "name": "DeepSeek-R1 (Clinical CoT)",
+      "falsification_acc": 84.1,
+      "false_acceptance_rate": 6.8,
+      "cochrane_rob_rho": 0.82,
+      "dicom_grounding_f1": 0.76,
+      "brier_score": 0.114,
+      "expected_calibration_error": 0.056,
+      "dca_net_utility_acc": 81.2,
+      "salutogenic_manageability_acc": 74.0,
+      "latency_ms": 1420.0,
+      "sei": 82.9
+    },
+    {
+      "name": "Med-Gemma-27B",
+      "falsification_acc": 73.6,
+      "false_acceptance_rate": 12.4,
+      "cochrane_rob_rho": 0.74,
+      "dicom_grounding_f1": 0.71,
+      "brier_score": 0.145,
+      "expected_calibration_error": 0.082,
+      "dca_net_utility_acc": 69.5,
+      "salutogenic_manageability_acc": 62.1,
+      "latency_ms": 380.0,
+      "sei": 74.9
+    },
+    {
+      "name": "Llama-3.1-70B-Instruct",
+      "falsification_acc": 68.2,
+      "false_acceptance_rate": 16.5,
+      "cochrane_rob_rho": 0.69,
+      "dicom_grounding_f1": 0.65,
+      "brier_score": 0.182,
+      "expected_calibration_error": 0.112,
+      "dca_net_utility_acc": 64.0,
+      "salutogenic_manageability_acc": 55.4,
+      "latency_ms": 520.0,
+      "sei": 69.7
+    },
+    {
+      "name": "BioMistral-7B",
+      "falsification_acc": 52.0,
+      "false_acceptance_rate": 28.6,
+      "cochrane_rob_rho": 0.51,
+      "dicom_grounding_f1": 0.48,
+      "brier_score": 0.245,
+      "expected_calibration_error": 0.168,
+      "dca_net_utility_acc": 44.5,
+      "salutogenic_manageability_acc": 38.0,
+      "latency_ms": 190.0,
+      "sei": 54.6
+    }
+  ]
+}

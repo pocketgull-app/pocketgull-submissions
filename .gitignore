@@ -9,6 +9,25 @@ real_model/
 *.edf
 *.csv
 
+# Large Contest Caches, Binary Arrays, Native Wheels & Font Binaries (GitHub 100MB Push Guard)
+*.npy
+*.npz
+*.parquet
+*.so
+*.pyd
+*.whl
+*.ttf
+*.otf
+*.tar.gz
+*.zip
+*.log
+contests/casmi_2026/latest_output/
+contests/casmi_2026/latest_v30_output/
+contests/casmi_2026/pulled_kernel*/
+contests/pocketgull_font_dataset/
+contests/lemonade_pseudo_labels/
+contests/pharmacogenomics_store/
+
 # Python environment & cache
 __pycache__/
 *.pyc
